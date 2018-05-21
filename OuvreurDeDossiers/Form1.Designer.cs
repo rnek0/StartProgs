@@ -33,11 +33,11 @@
             this.comboChoixDossier = new System.Windows.Forms.ComboBox();
             this.buttonEditerDossiers = new System.Windows.Forms.Button();
             this.groupExecution = new System.Windows.Forms.GroupBox();
-            this.groupAjout = new System.Windows.Forms.GroupBox();
-            this.buttonAjouter = new System.Windows.Forms.Button();
-            this.textBoxAjouter = new System.Windows.Forms.TextBox();
-            this.buttonEffaceDossier = new System.Windows.Forms.Button();
             this.buttonAjouterDossier = new System.Windows.Forms.Button();
+            this.buttonEffaceDossier = new System.Windows.Forms.Button();
+            this.groupAjout = new System.Windows.Forms.GroupBox();
+            this.textBoxAjouter = new System.Windows.Forms.TextBox();
+            this.buttonAjouter = new System.Windows.Forms.Button();
             this.groupModifier = new System.Windows.Forms.GroupBox();
             this.textBoxModifier = new System.Windows.Forms.TextBox();
             this.buttonModifier = new System.Windows.Forms.Button();
@@ -60,14 +60,14 @@
             this.buttonOuvrir.TabIndex = 1;
             this.buttonOuvrir.Text = "Ouvrir le dossier";
             this.buttonOuvrir.UseVisualStyleBackColor = true;
-            this.buttonOuvrir.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboChoixDossier
             // 
+            this.comboChoixDossier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboChoixDossier.FormattingEnabled = true;
-            this.comboChoixDossier.Location = new System.Drawing.Point(97, 20);
+            this.comboChoixDossier.Location = new System.Drawing.Point(97, 18);
             this.comboChoixDossier.Name = "comboChoixDossier";
-            this.comboChoixDossier.Size = new System.Drawing.Size(552, 21);
+            this.comboChoixDossier.Size = new System.Drawing.Size(552, 28);
             this.comboChoixDossier.TabIndex = 0;
             this.comboChoixDossier.Text = " >> Choix des dossiers a ouvrir...";
             this.comboChoixDossier.SelectedIndexChanged += new System.EventHandler(this.comboChoixDossier_SelectedIndexChanged);
@@ -81,7 +81,7 @@
             this.buttonEditerDossiers.Text = "U";
             this.toolTip1.SetToolTip(this.buttonEditerDossiers, "Modifier ce dossier ");
             this.buttonEditerDossiers.UseVisualStyleBackColor = true;
-            this.buttonEditerDossiers.Click += new System.EventHandler(this.buttonEditerDossiers_Click);
+            this.buttonEditerDossiers.Click += new System.EventHandler(this.ButtonEditerDossiers_Click);
             // 
             // groupExecution
             // 
@@ -97,33 +97,16 @@
             this.groupExecution.TabStop = false;
             this.groupExecution.Text = "Selection du dossier";
             // 
-            // groupAjout
+            // buttonAjouterDossier
             // 
-            this.groupAjout.Controls.Add(this.textBoxAjouter);
-            this.groupAjout.Controls.Add(this.buttonAjouter);
-            this.groupAjout.Location = new System.Drawing.Point(10, 169);
-            this.groupAjout.Name = "groupAjout";
-            this.groupAjout.Size = new System.Drawing.Size(762, 58);
-            this.groupAjout.TabIndex = 4;
-            this.groupAjout.TabStop = false;
-            this.groupAjout.Text = "Ajouter dossier";
-            // 
-            // buttonAjouter
-            // 
-            this.buttonAjouter.Location = new System.Drawing.Point(655, 19);
-            this.buttonAjouter.Name = "buttonAjouter";
-            this.buttonAjouter.Size = new System.Drawing.Size(101, 23);
-            this.buttonAjouter.TabIndex = 3;
-            this.buttonAjouter.Text = "Ajouter dossier";
-            this.buttonAjouter.UseVisualStyleBackColor = true;
-            this.buttonAjouter.Click += new System.EventHandler(this.buttonAjouter_Click);
-            // 
-            // textBoxAjouter
-            // 
-            this.textBoxAjouter.Location = new System.Drawing.Point(10, 21);
-            this.textBoxAjouter.Name = "textBoxAjouter";
-            this.textBoxAjouter.Size = new System.Drawing.Size(639, 20);
-            this.textBoxAjouter.TabIndex = 4;
+            this.buttonAjouterDossier.Location = new System.Drawing.Point(10, 19);
+            this.buttonAjouterDossier.Name = "buttonAjouterDossier";
+            this.buttonAjouterDossier.Size = new System.Drawing.Size(23, 23);
+            this.buttonAjouterDossier.TabIndex = 2;
+            this.buttonAjouterDossier.Text = "C";
+            this.toolTip1.SetToolTip(this.buttonAjouterDossier, "Ajouter un dossier a ouvrir");
+            this.buttonAjouterDossier.UseVisualStyleBackColor = true;
+            this.buttonAjouterDossier.Click += new System.EventHandler(this.buttonAjouterDossier_Click);
             // 
             // buttonEffaceDossier
             // 
@@ -136,16 +119,33 @@
             this.buttonEffaceDossier.UseVisualStyleBackColor = true;
             this.buttonEffaceDossier.Click += new System.EventHandler(this.buttonEffaceDossier_Click);
             // 
-            // buttonAjouterDossier
+            // groupAjout
             // 
-            this.buttonAjouterDossier.Location = new System.Drawing.Point(10, 19);
-            this.buttonAjouterDossier.Name = "buttonAjouterDossier";
-            this.buttonAjouterDossier.Size = new System.Drawing.Size(23, 23);
-            this.buttonAjouterDossier.TabIndex = 2;
-            this.buttonAjouterDossier.Text = "C";
-            this.toolTip1.SetToolTip(this.buttonAjouterDossier, "Ajouter un dossier a ouvrir");
-            this.buttonAjouterDossier.UseVisualStyleBackColor = true;
-            this.buttonAjouterDossier.Click += new System.EventHandler(this.buttonAjouterDossier_Click);
+            this.groupAjout.Controls.Add(this.textBoxAjouter);
+            this.groupAjout.Controls.Add(this.buttonAjouter);
+            this.groupAjout.Location = new System.Drawing.Point(10, 169);
+            this.groupAjout.Name = "groupAjout";
+            this.groupAjout.Size = new System.Drawing.Size(762, 58);
+            this.groupAjout.TabIndex = 4;
+            this.groupAjout.TabStop = false;
+            this.groupAjout.Text = "Ajouter dossier";
+            // 
+            // textBoxAjouter
+            // 
+            this.textBoxAjouter.Location = new System.Drawing.Point(10, 21);
+            this.textBoxAjouter.Name = "textBoxAjouter";
+            this.textBoxAjouter.Size = new System.Drawing.Size(639, 20);
+            this.textBoxAjouter.TabIndex = 4;
+            // 
+            // buttonAjouter
+            // 
+            this.buttonAjouter.Location = new System.Drawing.Point(655, 19);
+            this.buttonAjouter.Name = "buttonAjouter";
+            this.buttonAjouter.Size = new System.Drawing.Size(101, 23);
+            this.buttonAjouter.TabIndex = 3;
+            this.buttonAjouter.Text = "Ajouter dossier";
+            this.buttonAjouter.UseVisualStyleBackColor = true;
+            this.buttonAjouter.Click += new System.EventHandler(this.buttonAjouter_Click);
             // 
             // groupModifier
             // 

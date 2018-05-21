@@ -9,24 +9,34 @@ namespace OuvreurDeDossiers
     {
         private static string MonFichier = "";
 
+        /// <summary>
+        /// Ctor.
+        /// </summary>
         static MesDossiersPersistance()
         {
-            MonFichier = System.Environment.CurrentDirectory + "\\" + "MesDossiers.dat";
+            MonFichier = Environment.CurrentDirectory + "\\" + "MesDossiers.dat";
         }
 
-        private static bool fichierExiste()
+        /// <summary>
+        /// Verifie l'existance du dossier.
+        /// </summary>
+        /// <returns>bool</returns>
+        private static bool FichierExiste()
         {
             StringBuilder CheminFichier = new StringBuilder();
-            CheminFichier.Append(System.Environment.CurrentDirectory);
+            CheminFichier.Append(Environment.CurrentDirectory);
             CheminFichier.Append(@"\");
             CheminFichier.Append("MesDossiers.dat");
             MonFichier = CheminFichier.ToString();
             return (File.Exists(MonFichier))? true : false;
         }
-        
-        // ENREGISTREMENT DES DATAS
+
+        /// <summary>
+        /// Sauvegarde les données dans le fichier.
+        /// </summary>
+        /// <param name="lesDossiers"></param>
         public static void SauvegardeDansFichier(List<string> lesDossiers) {
-            if (MesDossiersPersistance.fichierExiste() == true)
+            if (MesDossiersPersistance.FichierExiste() == true)
             {
                 try
                 {
@@ -55,11 +65,14 @@ namespace OuvreurDeDossiers
             }
         }
         
-        // RECUPERATION DES DATAS
+        /// <summary>
+        /// Liste les données dans le fichier.
+        /// </summary>
+        /// <returns>Liste de chemins a ouvrir.</returns>
         public static List<string> LectureDansFichier() 
         {
             List<string> listeSauvegardee = new List<string>();
-            if (MesDossiersPersistance.fichierExiste() == true)
+            if (MesDossiersPersistance.FichierExiste() == true)
             {
                 try
                 {
@@ -76,7 +89,7 @@ namespace OuvreurDeDossiers
                 }
                 catch (System.IO.FileNotFoundException)
                 {
-                    // Le fichier n'existe pas alors je le crée !!!!
+                    // TODO: Le fichier n'existe pas alors je le crée ??
                     throw;
                 }
                 catch (Exception)

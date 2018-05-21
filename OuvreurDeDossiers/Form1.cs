@@ -16,15 +16,36 @@ namespace OuvreurDeDossiers
             InitializeComponent();
             TipAleatoire();
             mesDossiersImportants = MesDossiers.Instance.Dossiers;
-            PeupleCombo(comboChoixDossier, mesDossiersImportants); //InitializeCombo(comboChoixDossier);
+            InitializeCombo(comboChoixDossier, mesDossiersImportants);
+
+            // Ouverture du dossier séléctionné.
+            buttonOuvrir.Click += (s,e) => {
+                if (comboChoixDossier.SelectedItem != null)
+                {
+                    StartProgs.AppOpener Ouvreur = StartProgs.AppOpener.Instance;
+                    Ouvreur.Chemin = comboChoixDossier.SelectedItem.ToString();
+                    try
+                    {
+                        Ouvreur.OuvreLeDossier();
+                    }
+                    catch (Exception remontee)
+                    {
+                        MessageBox.Show(remontee.Message);
+                        throw;
+                    }
+                }
+            };
         }
 
-        private void PeupleCombo(ComboBox cbx, List<string> listeDesDossiers)
+        private void InitializeCombo(ComboBox cbx, List<string> listeDesDossiers)
         {
             cbx.DataSource = null;
             cbx.DataSource = listeDesDossiers;
         }
 
+        /// <summary>
+        /// Tip aleatoire.
+        /// </summary>
         void TipAleatoire()
         {
             string[] tips = new string[]{
@@ -39,29 +60,8 @@ namespace OuvreurDeDossiers
             labelTips.Text = tips[rd.Next(nbTips)].ToString();
         }
 
-        // OUVERTURE DU DOSSIER SELECTIONNE
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (comboChoixDossier.SelectedItem != null)
-            { 
-                StartProgs.AppOpener Ouvreur = StartProgs.AppOpener.Instance;
-
-                Ouvreur.Chemin = comboChoixDossier.SelectedItem.ToString();
-
-                try
-                {
-                    Ouvreur.OuvreLeDossier();
-                }
-                catch (Exception remontee)
-                {
-                    MessageBox.Show(remontee.Message);
-                    throw;
-                }
-            }
-        }
-
         #region - NAVIGATION ENTRE GROUPBOXES -
-        private void buttonEditerDossiers_Click(object sender, EventArgs e)
+        private void ButtonEditerDossiers_Click(object sender, EventArgs e)
         {
             if (comboChoixDossier.SelectedItem != null) {
                 ancienneValeur = comboChoixDossier.SelectedItem.ToString();
@@ -124,7 +124,7 @@ namespace OuvreurDeDossiers
             {
                 MesDossiersServices.AjouteDossier(textBoxAjouter.Text, mesDossiersImportants);
                 AfficheLeGroupe(affichage, groupExecution.Name);
-                PeupleCombo(comboChoixDossier, mesDossiersImportants);
+                InitializeCombo(comboChoixDossier, mesDossiersImportants);
             }
         }
 
@@ -142,7 +142,7 @@ namespace OuvreurDeDossiers
             // Enlever le dossier de la liste !!!
             MesDossiersServices.SupprimeDossier(textBoxSupprimer.Text ,mesDossiersImportants);
             AfficheLeGroupe(affichage, groupExecution.Name);
-            PeupleCombo(comboChoixDossier, mesDossiersImportants);
+            InitializeCombo(comboChoixDossier, mesDossiersImportants);
         }
 
         private void buttonModifier_Click(object sender, EventArgs e)
@@ -150,7 +150,7 @@ namespace OuvreurDeDossiers
             // Modifier le dossier dans la liste !!!
             MesDossiersServices.ModifieDossier(ancienneValeur, textBoxModifier.Text, mesDossiersImportants);
             AfficheLeGroupe(affichage, groupExecution.Name);
-            PeupleCombo(comboChoixDossier, mesDossiersImportants);
+            InitializeCombo(comboChoixDossier, mesDossiersImportants);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

@@ -1,34 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+using System.Diagnostics;
 namespace StartProgs
 {
     /// <summary>
-    /// Singleton servant a ouvrir un dossier avec explorer.exe
+    /// Singleton servant a ouvrir un dossier avec explorer.exe.
     /// </summary>
     public sealed class AppOpener
     {
         private static AppOpener _instance;
         static readonly object instanceLock = new object();
 
-        private AppOpener()
-        {
-            //Chemin = @"C:\";
-        }
+        private AppOpener(){}
 
         public static AppOpener Instance
         {
             get
             {
-                if (_instance == null) //Les locks prennent du temps, il est préférable de vérifier d'abord la nullité de l'instance.
+                // Les locks prennent du temps !
+                if (_instance == null) 
                 {
                     lock (instanceLock)
                     {
-                        if (_instance == null) //on vérifie encore, au cas où l'instance aurait été créée entretemps.
+                        // donc on vérifie encore, 
+                        // au cas où l'instance aurait été créée entretemps.
+                        if (_instance == null) 
                             _instance = new AppOpener();
                     }
                 }
@@ -50,8 +45,10 @@ namespace StartProgs
         public void OuvreLeDossier(string dossier="")
         {
             dossier = Chemin;
-            System.Diagnostics.ProcessStartInfo monProcess = new System.Diagnostics.ProcessStartInfo();
-            monProcess.FileName = "explorer.exe";
+            ProcessStartInfo monProcess = new ProcessStartInfo
+            {
+                FileName = "explorer.exe"
+            };
 
             if (dossier == "")
             { 
@@ -61,12 +58,11 @@ namespace StartProgs
             {
                 monProcess.Arguments = dossier;
             }
+
             try
             {
-                
-                MessageBox.Show("Repertoire " + dossier + " existe ? : " + System.IO.Directory.Exists(dossier).ToString());
                 if (System.IO.Directory.Exists(dossier)) { 
-                    System.Diagnostics.Process.Start(monProcess);
+                    Process.Start(monProcess);
                 }
             }
             catch (Exception)

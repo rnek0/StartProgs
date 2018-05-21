@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OuvreurDeDossiers
 {
     public sealed class MesDossiers
     {
-        List<string> listeDeDossiers;
+        readonly List<string> listeDeDossiers;
         public List<string> Dossiers { get { return listeDeDossiers;}}
         private MesDossiers()
         {
-            //listeDeDossiers = new List<string>() { @"C:\", @"D:\" };
             listeDeDossiers = MesDossiersPersistance.LectureDansFichier();
         }
 
