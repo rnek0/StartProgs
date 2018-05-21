@@ -2,13 +2,18 @@
 
 namespace OuvreurDeDossiers
 {
-    public sealed class MesDossiers
+    public class MesDossiers
     {
-        readonly List<string> listeDeDossiers;
-        public List<string> Dossiers { get { return listeDeDossiers;}}
+        List<string> listeDeDossiers = null;
+        public List<string> Dossiers {
+            get { return listeDeDossiers;}
+            set { listeDeDossiers = value; }
+        }
+
         private MesDossiers()
         {
-            listeDeDossiers = MesDossiersPersistance.LectureDansFichier();
+            MesDossiersServices mesDossiers = new MesDossiersServices();
+            Dossiers = mesDossiers.LireDossiers();
         }
 
         public static readonly MesDossiers Instance = new MesDossiers();

@@ -7,16 +7,25 @@ namespace OuvreurDeDossiers
 {
     public partial class Form1 : Form
     {
-        List<string> mesDossiersImportants;
+        List<string> MesDossiersImportants { get; set; }
+
         Point positionInitiale = new Point(10, 10);
         string ancienneValeur = "";
+        MesDossiersServices datas;
 
         public Form1()
         {
             InitializeComponent();
+
+            datas = new MesDossiersServices();
+
             TipAleatoire();
-            mesDossiersImportants = MesDossiers.Instance.Dossiers;
-            InitializeCombo(comboChoixDossier, mesDossiersImportants);
+
+            // DEBUT.
+            MesDossiers d = MesDossiers.Instance;
+            MesDossiersImportants = d.Dossiers;
+
+            InitializeCombo(comboChoixDossier, MesDossiersImportants);
 
             // Ouverture du dossier séléctionné.
             buttonOuvrir.Click += (s,e) => {
@@ -35,30 +44,22 @@ namespace OuvreurDeDossiers
                     }
                 }
             };
-        }
 
-        private void InitializeCombo(ComboBox cbx, List<string> listeDesDossiers)
-        {
-            cbx.DataSource = null;
-            cbx.DataSource = listeDesDossiers;
-        }
-
-        /// <summary>
-        /// Tip aleatoire.
-        /// </summary>
-        void TipAleatoire()
-        {
-            string[] tips = new string[]{
-                "ALT + F4 > quitter", 
-                "ESC > annuler",
-                "Bouton C > ajouter",
-                "Bouton U > modifier",
-                "Bouton D > éffacer"
+            /// <summary>
+            /// Drag window.
+            /// </summary>
+            /// <param name="sender">Form</param>
+            /// <param name="e">Mouse event</param>
+            this.MouseDown += (se, ev) => {
+                if (ev.Button == MouseButtons.Left)
+                {
+                    ReleaseCapture();
+                    SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                }
             };
-            int nbTips = tips.Length;
-            Random rd = new Random();
-            labelTips.Text = tips[rd.Next(nbTips)].ToString();
+
         }
+
 
         #region - NAVIGATION ENTRE GROUPBOXES -
         private void ButtonEditerDossiers_Click(object sender, EventArgs e)
@@ -69,13 +70,13 @@ namespace OuvreurDeDossiers
             }
         }
 
-        private void buttonAjouterDossier_Click(object sender, EventArgs e)
+        private void ButtonAjouterDossier_Click(object sender, EventArgs e)
         {
             textBoxAjouter.Text = "";
             AfficheLeGroupe(affichage, groupAjout.Name);
         }
 
-        private void buttonEffaceDossier_Click(object sender, EventArgs e)
+        private void ButtonEffaceDossier_Click(object sender, EventArgs e)
         {
             if (comboChoixDossier.SelectedItem != null)
             {
@@ -108,13 +109,26 @@ namespace OuvreurDeDossiers
                 bool ok = (item.Name.Equals(nomDuGroupe))? item.Visible = true : item.Visible = false;
             }
         }
+
+        // APPUI TOUCHE ESC.
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                AfficheLeGroupe(affichage, groupExecution.Name);
+            }
+        }
+
         #endregion
 
-        private void buttonAjouter_Click(object sender, EventArgs e)
+        // AJOUT ok
+        private void ButtonAjouter_Click(object sender, EventArgs e)
         {
             // Ajouter le dossier dans la liste
             var entree = textBoxAjouter.Text;
             bool sortie = false;
+
+            // TODO: refactoriser ici
             if (entree == "")
             {
                 sortie = true;
@@ -122,13 +136,14 @@ namespace OuvreurDeDossiers
             }
             if (!sortie)
             {
-                MesDossiersServices.AjouteDossier(textBoxAjouter.Text, mesDossiersImportants);
+                datas.AjouteDossier(entree, MesDossiersImportants);
+                MesDossiersImportants.Add(entree);
                 AfficheLeGroupe(affichage, groupExecution.Name);
-                InitializeCombo(comboChoixDossier, mesDossiersImportants);
             }
+            InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
-        private void comboChoixDossier_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboChoixDossier_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboChoixDossier.SelectedItem != null)
             {
@@ -137,41 +152,83 @@ namespace OuvreurDeDossiers
             }
         }
 
-        private void buttonSupprimer_Click(object sender, EventArgs e)
+        // SUPPRESSION
+        private void ButtonSupprimer_Click(object sender, EventArgs e)
         {
             // Enlever le dossier de la liste !!!
-            MesDossiersServices.SupprimeDossier(textBoxSupprimer.Text ,mesDossiersImportants);
+            datas.SupprimeDossier(textBoxSupprimer.Text ,MesDossiersImportants);
             AfficheLeGroupe(affichage, groupExecution.Name);
-            InitializeCombo(comboChoixDossier, mesDossiersImportants);
+            InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
-        private void buttonModifier_Click(object sender, EventArgs e)
+        // MODIFICATION
+        private void ButtonModifier_Click(object sender, EventArgs e)
         {
             // Modifier le dossier dans la liste !!!
-            MesDossiersServices.ModifieDossier(ancienneValeur, textBoxModifier.Text, mesDossiersImportants);
+            datas.ModifieDossier(ancienneValeur, textBoxModifier.Text, MesDossiersImportants);
             AfficheLeGroupe(affichage, groupExecution.Name);
-            InitializeCombo(comboChoixDossier, mesDossiersImportants);
+            InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape )
-            {
-                AfficheLeGroupe(affichage, groupExecution.Name);
-            }
-        }
-
+        // FERMETURE APPLICATION
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MesDossiersPersistance.SauvegardeDansFichier(mesDossiersImportants);
-            //
+            datas.SauvegardeDossiers(MesDossiersImportants);
+            
             DialogResult dialogResult = MessageBox.Show("Vraiement quitter ?",
-                      "CONFIRMER LA FERMETURE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign,true);
+                      "CONFIRMER LA FERMETURE", 
+                      MessageBoxButtons.YesNo, 
+                      MessageBoxIcon.Warning, 
+                      MessageBoxDefaultButton.Button1);
 
             if (dialogResult == DialogResult.No)
             {
                 e.Cancel = true;
             }
+
         }
+
+        /// <summary>
+        /// Initialization du combo avec les données de la liste.
+        /// </summary>
+        /// <param name="cbx"></param>
+        /// <param name="listeDesDossiers"></param>
+        private void InitializeCombo(ComboBox cbx, List<string> listeDesDossiers)
+        {
+            cbx.DataSource = null;
+            cbx.DataSource = listeDesDossiers;
+            cbx.SelectedIndex = (listeDesDossiers.Count > 1) ? cbx.SelectedIndex = 0 : cbx.SelectedIndex = -1;
+            
+        }
+
+        /// <summary>
+        /// Tip aleatoire.
+        /// </summary>
+        void TipAleatoire()
+        {
+            string[] tips = new string[]{
+                "ALT + F4 > quitter",
+                "ESC > annuler",
+                "Bouton C > ajouter",
+                "Bouton U > modifier",
+                "Bouton D > éffacer"
+            };
+            int nbTips = tips.Length;
+            Random rd = new Random();
+            labelTips.Text = tips[rd.Next(nbTips)].ToString();
+        }
+
+        #region [Drag Form]
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        
+
+        #endregion
     }
 }

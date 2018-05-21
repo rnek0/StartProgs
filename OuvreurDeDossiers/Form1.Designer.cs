@@ -70,7 +70,7 @@
             this.comboChoixDossier.Size = new System.Drawing.Size(552, 28);
             this.comboChoixDossier.TabIndex = 0;
             this.comboChoixDossier.Text = " >> Choix des dossiers a ouvrir...";
-            this.comboChoixDossier.SelectedIndexChanged += new System.EventHandler(this.comboChoixDossier_SelectedIndexChanged);
+            this.comboChoixDossier.SelectedIndexChanged += new System.EventHandler(this.ComboChoixDossier_SelectedIndexChanged);
             // 
             // buttonEditerDossiers
             // 
@@ -106,7 +106,7 @@
             this.buttonAjouterDossier.Text = "C";
             this.toolTip1.SetToolTip(this.buttonAjouterDossier, "Ajouter un dossier a ouvrir");
             this.buttonAjouterDossier.UseVisualStyleBackColor = true;
-            this.buttonAjouterDossier.Click += new System.EventHandler(this.buttonAjouterDossier_Click);
+            this.buttonAjouterDossier.Click += new System.EventHandler(this.ButtonAjouterDossier_Click);
             // 
             // buttonEffaceDossier
             // 
@@ -117,7 +117,7 @@
             this.buttonEffaceDossier.Text = "D";
             this.toolTip1.SetToolTip(this.buttonEffaceDossier, "Supprimer ce dossier");
             this.buttonEffaceDossier.UseVisualStyleBackColor = true;
-            this.buttonEffaceDossier.Click += new System.EventHandler(this.buttonEffaceDossier_Click);
+            this.buttonEffaceDossier.Click += new System.EventHandler(this.ButtonEffaceDossier_Click);
             // 
             // groupAjout
             // 
@@ -145,7 +145,7 @@
             this.buttonAjouter.TabIndex = 3;
             this.buttonAjouter.Text = "Ajouter dossier";
             this.buttonAjouter.UseVisualStyleBackColor = true;
-            this.buttonAjouter.Click += new System.EventHandler(this.buttonAjouter_Click);
+            this.buttonAjouter.Click += new System.EventHandler(this.ButtonAjouter_Click);
             // 
             // groupModifier
             // 
@@ -173,7 +173,7 @@
             this.buttonModifier.TabIndex = 3;
             this.buttonModifier.Text = "Modifier dossier";
             this.buttonModifier.UseVisualStyleBackColor = true;
-            this.buttonModifier.Click += new System.EventHandler(this.buttonModifier_Click);
+            this.buttonModifier.Click += new System.EventHandler(this.ButtonModifier_Click);
             // 
             // groupSupprimer
             // 
@@ -203,7 +203,7 @@
             this.buttonSupprimer.TabIndex = 3;
             this.buttonSupprimer.Text = "Supprimer dossier";
             this.buttonSupprimer.UseVisualStyleBackColor = false;
-            this.buttonSupprimer.Click += new System.EventHandler(this.buttonSupprimer_Click);
+            this.buttonSupprimer.Click += new System.EventHandler(this.ButtonSupprimer_Click);
             // 
             // toolTip1
             // 

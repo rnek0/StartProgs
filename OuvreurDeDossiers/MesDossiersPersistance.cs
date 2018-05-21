@@ -5,38 +5,30 @@ using System.Text;
 
 namespace OuvreurDeDossiers
 {
-    public static class MesDossiersPersistance
+    /// <summary>
+    /// Actions sur IO.
+    /// </summary>
+    public class MesDossiersPersistance
     {
-        private static string MonFichier = "";
+        private string MonFichier = "";
+        //List<string> Dossiers { get; set; }
 
         /// <summary>
         /// Ctor.
         /// </summary>
-        static MesDossiersPersistance()
+        public MesDossiersPersistance()
         {
             MonFichier = Environment.CurrentDirectory + "\\" + "MesDossiers.dat";
+            //Dossiers = new List<string>();
         }
 
-        /// <summary>
-        /// Verifie l'existance du dossier.
-        /// </summary>
-        /// <returns>bool</returns>
-        private static bool FichierExiste()
-        {
-            StringBuilder CheminFichier = new StringBuilder();
-            CheminFichier.Append(Environment.CurrentDirectory);
-            CheminFichier.Append(@"\");
-            CheminFichier.Append("MesDossiers.dat");
-            MonFichier = CheminFichier.ToString();
-            return (File.Exists(MonFichier))? true : false;
-        }
-
+        #region SAUVEGARDE
         /// <summary>
         /// Sauvegarde les données dans le fichier.
         /// </summary>
         /// <param name="lesDossiers"></param>
-        public static void SauvegardeDansFichier(List<string> lesDossiers) {
-            if (MesDossiersPersistance.FichierExiste() == true)
+        public void SauvegardeDansFichier(List<string> lesDossiers) {
+            if (FichierExiste() == true)
             {
                 try
                 {
@@ -45,59 +37,91 @@ namespace OuvreurDeDossiers
                         using (StreamWriter ecrivain = new StreamWriter(monStream) )
                         {
                             StringBuilder contenu = new StringBuilder();
+                            //Dossiers.Clear();
                             foreach (string item in lesDossiers)
                             {
+                                //Dossiers.Add(item);
                                 contenu.Append(item);
                                 contenu.Append(Environment.NewLine);
                             }
-                            ecrivain.Write(contenu.ToString());
+                            var text = contenu.ToString();
+                            ecrivain.Write(text);
                         }
                     }
                 }
                 catch (System.IO.FileNotFoundException)
                 {
+                    // on crée et on re-essaie.
                     File.Create(MonFichier);
+                    System.Threading.Thread.Sleep(100);                    
+                    SauvegardeDansFichier(lesDossiers);
+                    return;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    throw new Exception("Ooups ! Problème d'enregistement des datas.", e);                    
+                    throw new Exception("Ooups ! Problème d'enregistement des datas.", ex);                    
                 }
             }
         }
-        
+
+        #endregion
+
+        #region LECTURE
         /// <summary>
         /// Liste les données dans le fichier.
         /// </summary>
         /// <returns>Liste de chemins a ouvrir.</returns>
-        public static List<string> LectureDansFichier() 
+        public List<string> LectureDansFichier() 
         {
-            List<string> listeSauvegardee = new List<string>();
-            if (MesDossiersPersistance.FichierExiste() == true)
+            List<string> listeLue = new List<string>();
+
+            if (FichierExiste() == true)
             {
                 try
                 {
                     using (FileStream monStream = File.OpenRead(MonFichier))
                     {
                         using (StreamReader lecteur = new StreamReader(monStream) )
-                        {   
+                        {
+                            var line = lecteur.ReadLine();
+                            listeLue.Add(line);
                             while (!lecteur.EndOfStream)
                             {
-                                listeSauvegardee.Add(lecteur.ReadLine());
+                                listeLue.Add(lecteur.ReadLine());
                             }
                         }
                     }
+                    //Dossiers = listeLue;
                 }
                 catch (System.IO.FileNotFoundException)
                 {
-                    // TODO: Le fichier n'existe pas alors je le crée ??
-                    throw;
+                    System.Windows.Forms.MessageBox.Show("Pas de données disponibles, voulez vous restaurer la liste par defaut ?", "Attention",System.Windows.Forms.MessageBoxButtons.YesNo);
+                    MonFichier = Environment.CurrentDirectory + "\\" + "MesDossiers.dat";
+                    File.Create(MonFichier);
+
+                    // wait ! io is not mine...
+                    System.Threading.Thread.Sleep(1000);
+
+                    // next try
+                    LectureDansFichier();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    throw;
+                    throw new Exception("Ooups ! Problème de lecture des datas.", e);
                 }
             }
-            return listeSauvegardee;
+            return listeLue;
         }
+        #endregion
+
+        /// <summary>
+        /// Verifie l'existance du dossier.
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool FichierExiste()
+        {
+            return (File.Exists(MonFichier)) ? true : false;
+        }
+
     }
 }
