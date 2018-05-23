@@ -1,6 +1,6 @@
 ﻿namespace OuvreurDeDossiers
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -54,29 +54,35 @@
             // 
             // buttonOuvrir
             // 
-            this.buttonOuvrir.Location = new System.Drawing.Point(655, 19);
+            this.buttonOuvrir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOuvrir.Font = new System.Drawing.Font("Hermit", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOuvrir.Location = new System.Drawing.Point(663, 20);
             this.buttonOuvrir.Name = "buttonOuvrir";
-            this.buttonOuvrir.Size = new System.Drawing.Size(101, 23);
+            this.buttonOuvrir.Size = new System.Drawing.Size(101, 31);
             this.buttonOuvrir.TabIndex = 1;
-            this.buttonOuvrir.Text = "Ouvrir le dossier";
+            this.buttonOuvrir.Text = "Ouvrir";
             this.buttonOuvrir.UseVisualStyleBackColor = true;
             // 
             // comboChoixDossier
             // 
-            this.comboChoixDossier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboChoixDossier.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.comboChoixDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboChoixDossier.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboChoixDossier.ForeColor = System.Drawing.Color.DimGray;
             this.comboChoixDossier.FormattingEnabled = true;
-            this.comboChoixDossier.Location = new System.Drawing.Point(97, 18);
+            this.comboChoixDossier.Location = new System.Drawing.Point(105, 20);
             this.comboChoixDossier.Name = "comboChoixDossier";
-            this.comboChoixDossier.Size = new System.Drawing.Size(552, 28);
+            this.comboChoixDossier.Size = new System.Drawing.Size(552, 31);
             this.comboChoixDossier.TabIndex = 0;
-            this.comboChoixDossier.Text = " >> Choix des dossiers a ouvrir...";
             this.comboChoixDossier.SelectedIndexChanged += new System.EventHandler(this.ComboChoixDossier_SelectedIndexChanged);
             // 
             // buttonEditerDossiers
             // 
-            this.buttonEditerDossiers.Location = new System.Drawing.Point(39, 19);
+            this.buttonEditerDossiers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditerDossiers.Font = new System.Drawing.Font("Hermit", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEditerDossiers.Location = new System.Drawing.Point(38, 20);
             this.buttonEditerDossiers.Name = "buttonEditerDossiers";
-            this.buttonEditerDossiers.Size = new System.Drawing.Size(23, 23);
+            this.buttonEditerDossiers.Size = new System.Drawing.Size(30, 30);
             this.buttonEditerDossiers.TabIndex = 3;
             this.buttonEditerDossiers.Text = "U";
             this.toolTip1.SetToolTip(this.buttonEditerDossiers, "Modifier ce dossier ");
@@ -85,23 +91,27 @@
             // 
             // groupExecution
             // 
+            this.groupExecution.BackColor = System.Drawing.Color.Transparent;
             this.groupExecution.Controls.Add(this.buttonAjouterDossier);
             this.groupExecution.Controls.Add(this.buttonEffaceDossier);
             this.groupExecution.Controls.Add(this.comboChoixDossier);
             this.groupExecution.Controls.Add(this.buttonEditerDossiers);
             this.groupExecution.Controls.Add(this.buttonOuvrir);
-            this.groupExecution.Location = new System.Drawing.Point(10, 10);
+            this.groupExecution.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupExecution.Location = new System.Drawing.Point(5, 8);
             this.groupExecution.Name = "groupExecution";
-            this.groupExecution.Size = new System.Drawing.Size(762, 58);
+            this.groupExecution.Size = new System.Drawing.Size(769, 65);
             this.groupExecution.TabIndex = 3;
             this.groupExecution.TabStop = false;
-            this.groupExecution.Text = "Selection du dossier";
+            this.groupExecution.Text = " Selection du dossier ";
             // 
             // buttonAjouterDossier
             // 
-            this.buttonAjouterDossier.Location = new System.Drawing.Point(10, 19);
+            this.buttonAjouterDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAjouterDossier.Font = new System.Drawing.Font("Hermit", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAjouterDossier.Location = new System.Drawing.Point(5, 20);
             this.buttonAjouterDossier.Name = "buttonAjouterDossier";
-            this.buttonAjouterDossier.Size = new System.Drawing.Size(23, 23);
+            this.buttonAjouterDossier.Size = new System.Drawing.Size(30, 30);
             this.buttonAjouterDossier.TabIndex = 2;
             this.buttonAjouterDossier.Text = "C";
             this.toolTip1.SetToolTip(this.buttonAjouterDossier, "Ajouter un dossier a ouvrir");
@@ -110,9 +120,11 @@
             // 
             // buttonEffaceDossier
             // 
-            this.buttonEffaceDossier.Location = new System.Drawing.Point(68, 19);
+            this.buttonEffaceDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEffaceDossier.Font = new System.Drawing.Font("Hermit", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEffaceDossier.Location = new System.Drawing.Point(71, 20);
             this.buttonEffaceDossier.Name = "buttonEffaceDossier";
-            this.buttonEffaceDossier.Size = new System.Drawing.Size(23, 23);
+            this.buttonEffaceDossier.Size = new System.Drawing.Size(30, 30);
             this.buttonEffaceDossier.TabIndex = 4;
             this.buttonEffaceDossier.Text = "D";
             this.toolTip1.SetToolTip(this.buttonEffaceDossier, "Supprimer ce dossier");
@@ -121,6 +133,7 @@
             // 
             // groupAjout
             // 
+            this.groupAjout.BackColor = System.Drawing.Color.Transparent;
             this.groupAjout.Controls.Add(this.textBoxAjouter);
             this.groupAjout.Controls.Add(this.buttonAjouter);
             this.groupAjout.Location = new System.Drawing.Point(10, 169);
@@ -149,6 +162,7 @@
             // 
             // groupModifier
             // 
+            this.groupModifier.BackColor = System.Drawing.Color.Transparent;
             this.groupModifier.Controls.Add(this.textBoxModifier);
             this.groupModifier.Controls.Add(this.buttonModifier);
             this.groupModifier.Location = new System.Drawing.Point(10, 233);
@@ -177,6 +191,7 @@
             // 
             // groupSupprimer
             // 
+            this.groupSupprimer.BackColor = System.Drawing.Color.Transparent;
             this.groupSupprimer.Controls.Add(this.textBoxSupprimer);
             this.groupSupprimer.Controls.Add(this.buttonSupprimer);
             this.groupSupprimer.Location = new System.Drawing.Point(10, 297);
@@ -214,19 +229,22 @@
             // labelTips
             // 
             this.labelTips.AutoSize = true;
-            this.labelTips.Location = new System.Drawing.Point(668, 94);
+            this.labelTips.BackColor = System.Drawing.Color.Transparent;
+            this.labelTips.Font = new System.Drawing.Font("Hermit", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTips.ForeColor = System.Drawing.Color.White;
+            this.labelTips.Location = new System.Drawing.Point(560, 77);
             this.labelTips.Name = "labelTips";
-            this.labelTips.Size = new System.Drawing.Size(35, 13);
+            this.labelTips.Size = new System.Drawing.Size(63, 19);
             this.labelTips.TabIndex = 7;
             this.labelTips.Text = "label1";
             // 
-            // Form1
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.BackgroundImage = global::OuvreurDeDossiers.Properties.Resources.fond;
-            this.ClientSize = new System.Drawing.Size(782, 116);
+            this.BackgroundImage = global::OuvreurDeDossiers.Properties.Resources.fond1;
+            this.ClientSize = new System.Drawing.Size(783, 116);
             this.Controls.Add(this.labelTips);
             this.Controls.Add(this.groupSupprimer);
             this.Controls.Add(this.groupModifier);
@@ -234,13 +252,13 @@
             this.Controls.Add(this.groupExecution);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
-            this.Name = "Form1";
+            this.Name = "FormMain";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lanceur de dossiers";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupExecution.ResumeLayout(false);
             this.groupAjout.ResumeLayout(false);
             this.groupAjout.PerformLayout();

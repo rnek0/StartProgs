@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace OuvreurDeDossiers
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         List<string> MesDossiersImportants { get; set; }
 
@@ -13,7 +13,10 @@ namespace OuvreurDeDossiers
         string ancienneValeur = "";
         MesDossiersServices datas;
 
-        public Form1()
+        /// <summary>
+        /// Form App.
+        /// </summary>
+        public FormMain()
         {
             InitializeComponent();
 
@@ -21,28 +24,16 @@ namespace OuvreurDeDossiers
 
             TipAleatoire();
 
-            // DEBUT.
+            // DEBUT. 
             MesDossiers d = MesDossiers.Instance;
             MesDossiersImportants = d.Dossiers;
 
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
 
             // Ouverture du dossier séléctionné.
-            buttonOuvrir.Click += (s,e) => {
-                if (comboChoixDossier.SelectedItem != null)
-                {
-                    StartProgs.AppOpener Ouvreur = StartProgs.AppOpener.Instance;
-                    Ouvreur.Chemin = comboChoixDossier.SelectedItem.ToString();
-                    try
-                    {
-                        Ouvreur.OuvreLeDossier();
-                    }
-                    catch (Exception remontee)
-                    {
-                        MessageBox.Show(remontee.Message);
-                        throw;
-                    }
-                }
+            buttonOuvrir.Click += (s,e) =>
+            {
+                Ouvre();
             };
 
             /// <summary>
@@ -58,10 +49,77 @@ namespace OuvreurDeDossiers
                 }
             };
 
+            // Shortcuts.
+            this.KeyDown += (se,ev) => {
+
+                if (ev.KeyCode.Equals(Keys.Enter) && comboChoixDossier.Focus())
+                {
+                    Ouvre();
+                }
+
+                if (ev.KeyCode.Equals(Keys.F1))
+                {
+                    FormHelp formHelp = new FormHelp();
+                    formHelp.ShowDialog();
+                }
+
+                if (ev.KeyCode.Equals(Keys.F5))
+                {
+                    buttonAjouterDossier.PerformClick();
+                }
+
+                if (ev.KeyCode.Equals(Keys.F6))
+                {
+                    buttonEditerDossiers.PerformClick();
+                }
+
+                if (ev.KeyCode.Equals(Keys.F7))
+                {
+                    buttonEffaceDossier.PerformClick();
+                }
+
+                if (ev.KeyCode.Equals(Keys.F8))
+                {
+                    About about = new About();
+                    about.ShowDialog();
+                }
+
+                // ESC(retour a l'écran principal).
+                if (ev.KeyCode == Keys.Escape)
+                {
+                    AfficheLeGroupe(affichage, groupExecution.Name);
+                }
+            };
         }
 
+        /// <summary>
+        /// Opens folder.
+        /// </summary>
+        private void Ouvre()
+        {
+            if (comboChoixDossier.SelectedItem != null || comboChoixDossier.Focus())
+            {
+                StartProgs.AppOpener Ouvreur = StartProgs.AppOpener.Instance;
+
+                if (comboChoixDossier.SelectedItem != null)
+                {
+                    Ouvreur.Chemin = comboChoixDossier.SelectedItem.ToString();
+
+                    try
+                    {
+                        Ouvreur.OuvreLeDossier();
+                    }
+                    catch (Exception remontee)
+                    {
+                        MessageBox.Show(remontee.Message);
+                        throw;
+                    }
+                }
+            }
+        }
 
         #region - NAVIGATION ENTRE GROUPBOXES -
+
         private void ButtonEditerDossiers_Click(object sender, EventArgs e)
         {
             if (comboChoixDossier.SelectedItem != null) {
@@ -110,21 +168,19 @@ namespace OuvreurDeDossiers
             }
         }
 
-        // APPUI TOUCHE ESC.
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                AfficheLeGroupe(affichage, groupExecution.Name);
-            }
-        }
-
         #endregion
 
-        // AJOUT ok
+        // Ajout.
         private void ButtonAjouter_Click(object sender, EventArgs e)
         {
-            // Ajouter le dossier dans la liste
+            Ajoute();
+        }
+
+        /// <summary>
+        /// Ajouter le dossier dans la liste.
+        /// </summary>
+        private void Ajoute()
+        {
             var entree = textBoxAjouter.Text;
             bool sortie = false;
 
@@ -143,6 +199,7 @@ namespace OuvreurDeDossiers
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
+        // Met a jour les champs pour modif ou suppression.
         private void ComboChoixDossier_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboChoixDossier.SelectedItem != null)
@@ -152,7 +209,7 @@ namespace OuvreurDeDossiers
             }
         }
 
-        // SUPPRESSION
+        // Suppression.
         private void ButtonSupprimer_Click(object sender, EventArgs e)
         {
             // Enlever le dossier de la liste !!!
@@ -161,7 +218,7 @@ namespace OuvreurDeDossiers
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
-        // MODIFICATION
+        // Modification.
         private void ButtonModifier_Click(object sender, EventArgs e)
         {
             // Modifier le dossier dans la liste !!!
@@ -170,7 +227,9 @@ namespace OuvreurDeDossiers
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
-        // FERMETURE APPLICATION
+        /// <summary>
+        /// Fermeture de l'application.
+        /// </summary>      
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             datas.SauvegardeDossiers(MesDossiersImportants);
@@ -185,7 +244,6 @@ namespace OuvreurDeDossiers
             {
                 e.Cancel = true;
             }
-
         }
 
         /// <summary>
@@ -198,7 +256,6 @@ namespace OuvreurDeDossiers
             cbx.DataSource = null;
             cbx.DataSource = listeDesDossiers;
             cbx.SelectedIndex = (listeDesDossiers.Count > 1) ? cbx.SelectedIndex = 0 : cbx.SelectedIndex = -1;
-            
         }
 
         /// <summary>
@@ -207,15 +264,20 @@ namespace OuvreurDeDossiers
         void TipAleatoire()
         {
             string[] tips = new string[]{
-                "ALT + F4 > quitter",
-                "ESC > annuler",
-                "Bouton C > ajouter",
-                "Bouton U > modifier",
-                "Bouton D > éffacer"
+                "ALT + F4 > Quitter",
+                "ESC > Annuler",
+                "Bouton C > Ajouter",
+                "Bouton U > Modifier",
+                "Bouton D > Effacer",
+                "F5 > Ajouter",
+                "F6 > Modifier",
+                "F7 > Effacer",
+                "F1 > Aide",
+                "F8 > A propos"
             };
             int nbTips = tips.Length;
             Random rd = new Random();
-            labelTips.Text = tips[rd.Next(nbTips)].ToString();
+            labelTips.Text = $"Tip: {tips[rd.Next(nbTips)].ToString()}";
         }
 
         #region [Drag Form]
@@ -226,8 +288,6 @@ namespace OuvreurDeDossiers
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
-
-        
 
         #endregion
     }
