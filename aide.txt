@@ -1,0 +1,13 @@
+Aide de l'application:
+
+ALT + F4 > Quitter l'application.
+ESC > Retour a l'affichage précédent.
+Bouton C > Ajouter un chemin de dossier.
+Bouton U > Modifier un chemin de dossier.
+Bouton D > Effacer un chemin de dossier.
+F5 > Ajouter un chemin de dossier.
+F6 > Modifier un chemin de dossier.
+F7 > Effacer un chemin de dossier.
+
+F1 > Aide (cette fenêtre)
+F8 > A propos

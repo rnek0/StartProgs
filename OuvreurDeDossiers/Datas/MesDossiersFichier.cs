@@ -5,22 +5,36 @@ namespace OuvreurDeDossiers
     /// <summary>
     /// Actions sur la liste de dossiers.
     /// </summary>    
-    public class MesDossiersServices: IDatasOperations
+    public class MesDossiersFichier : IDatasOperations
     {
         List<string> DossiersService { get; set; }
 
-        MesDossiersPersistance persistance = null;
+        DatasIO persistance = null;
 
-        /// <summary>
-        /// Ctor.
-        /// </summary>
-        public MesDossiersServices()
+        // Ici injection !!!
+        public MesDossiersFichier(string datasIO)
         {
-            persistance = new MesDossiersPersistance();
+            switch (datasIO)
+            {
+                case "xml":
+                    persistance = new FoldersSerializer();
+                    break;
+
+                case "file":
+                    // TODO : renomer cette classe !
+                    persistance = new MesDossiersPersistance();
+                    break;
+
+                default:
+                    break;
+            }
+
+            
             DossiersService = persistance.LectureDansFichier();
+
         }
 
-        // ADD
+        // CREATE
         /// <summary>
         /// Ajoute un dossier.
         /// </summary>
@@ -31,8 +45,19 @@ namespace OuvreurDeDossiers
             DossiersService.Add(strDossier);
             persistance.SauvegardeDansFichier(DossiersService);
         }
+        
+        // READ.
+        /// <summary>
+        /// Lecture de la liste de dossiers.
+        /// </summary>
+        /// <returns>List<string></returns>
+        public List<string> LireDossiers()
+        {
+            DossiersService = persistance.LectureDansFichier();
+            return DossiersService;
+        }
 
-        // UPDATE
+        // UPDATE.
         /// <summary>
         /// Modifie l'entrée dans la liste.
         /// </summary>
@@ -41,12 +66,8 @@ namespace OuvreurDeDossiers
         /// <param name="laListeDesDossiers"></param>
         public void ModifieDossier(string ancienneValeur, string nouvelleValeur, List<string> laListeDesDossiers)
         {
-            // TODO: string.IsNullOrWhiteSpace. refactoriser ici (pas beau)
-            if (nouvelleValeur == "")
-            {
-                // pas de valeur donc pas de traitement.
-            }
-            else { 
+            if (!string.IsNullOrWhiteSpace(nouvelleValeur))
+            { 
                 int indice = 0;
                 int monID = 0;
                 foreach (string item in laListeDesDossiers)
@@ -63,7 +84,7 @@ namespace OuvreurDeDossiers
             }
         }
 
-        // DEL
+        // DEL.
         /// <summary>
         /// Supprime le dossier passé de la liste.
         /// </summary>
@@ -71,21 +92,23 @@ namespace OuvreurDeDossiers
         /// <param name="laListeDesDossiers"></param>
         public void SupprimeDossier(string strDossierPourSuppression, List<string> laListeDesDossiers)
         {
-            int i = laListeDesDossiers.FindIndex((o) => {return o.Equals(strDossierPourSuppression); });
+            //int index_old = laListeDesDossiers.FindIndex((o) => {return o == strDossierPourSuppression; });// Fixed ?
+            var index = 0;
+            for (int i = 0; i < laListeDesDossiers.Count; i++)
+            {
+                if (laListeDesDossiers[i] == strDossierPourSuppression)
+                {
+                    index = i;
+                    break;
+                }
+            }
 
-            laListeDesDossiers.RemoveAt(i);
+            laListeDesDossiers.RemoveAt(index);
 
             persistance.SauvegardeDansFichier(laListeDesDossiers);
         }
-
-        // READ
-        public List<string> LireDossiers()
-        {
-            DossiersService = persistance.LectureDansFichier();
-            return DossiersService;
-        }
-
-        // SAVE
+        
+        // SAVE.
         public void SauvegardeDossiers(List<string> datas)
         {
             persistance.SauvegardeDansFichier(datas);

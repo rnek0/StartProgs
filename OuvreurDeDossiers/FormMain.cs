@@ -11,7 +11,7 @@ namespace OuvreurDeDossiers
 
         Point positionInitiale = new Point(10, 10);
         string ancienneValeur = "";
-        MesDossiersServices datas;
+        IDatasOperations datas;
 
         /// <summary>
         /// Form App.
@@ -20,13 +20,15 @@ namespace OuvreurDeDossiers
         {
             InitializeComponent();
 
-            datas = new MesDossiersServices();
+            //var choixSerialization = "file"; // "xml"
+
+            var choixSerialization = "xml";
+
+            datas = new MesDossiersFichier(choixSerialization);
+
+            MesDossiersImportants = datas.LireDossiers();
 
             TipAleatoire();
-
-            // DEBUT. 
-            MesDossiers d = MesDossiers.Instance;
-            MesDossiersImportants = d.Dossiers;
 
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
 
@@ -66,11 +68,13 @@ namespace OuvreurDeDossiers
                 if (ev.KeyCode.Equals(Keys.F5))
                 {
                     buttonAjouterDossier.PerformClick();
+                    textBoxAjouter.Focus();
                 }
 
                 if (ev.KeyCode.Equals(Keys.F6))
                 {
                     buttonEditerDossiers.PerformClick();
+                    textBoxModifier.Focus();
                 }
 
                 if (ev.KeyCode.Equals(Keys.F7))
@@ -130,6 +134,7 @@ namespace OuvreurDeDossiers
 
         private void ButtonAjouterDossier_Click(object sender, EventArgs e)
         {
+            textBoxAjouter.Focus();
             textBoxAjouter.Text = "";
             AfficheLeGroupe(affichage, groupAjout.Name);
         }
@@ -173,6 +178,7 @@ namespace OuvreurDeDossiers
         // Ajout.
         private void ButtonAjouter_Click(object sender, EventArgs e)
         {
+            // TODO: enleve l'appel superflu !
             Ajoute();
         }
 
@@ -193,7 +199,6 @@ namespace OuvreurDeDossiers
             if (!sortie)
             {
                 datas.AjouteDossier(entree, MesDossiersImportants);
-                MesDossiersImportants.Add(entree);
                 AfficheLeGroupe(affichage, groupExecution.Name);
             }
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
@@ -212,7 +217,6 @@ namespace OuvreurDeDossiers
         // Suppression.
         private void ButtonSupprimer_Click(object sender, EventArgs e)
         {
-            // Enlever le dossier de la liste !!!
             datas.SupprimeDossier(textBoxSupprimer.Text ,MesDossiersImportants);
             AfficheLeGroupe(affichage, groupExecution.Name);
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
@@ -221,7 +225,6 @@ namespace OuvreurDeDossiers
         // Modification.
         private void ButtonModifier_Click(object sender, EventArgs e)
         {
-            // Modifier le dossier dans la liste !!!
             datas.ModifieDossier(ancienneValeur, textBoxModifier.Text, MesDossiersImportants);
             AfficheLeGroupe(affichage, groupExecution.Name);
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
@@ -232,8 +235,6 @@ namespace OuvreurDeDossiers
         /// </summary>      
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            datas.SauvegardeDossiers(MesDossiersImportants);
-            
             DialogResult dialogResult = MessageBox.Show("Vraiement quitter ?",
                       "CONFIRMER LA FERMETURE", 
                       MessageBoxButtons.YesNo, 
@@ -255,7 +256,10 @@ namespace OuvreurDeDossiers
         {
             cbx.DataSource = null;
             cbx.DataSource = listeDesDossiers;
-            cbx.SelectedIndex = (listeDesDossiers.Count > 1) ? cbx.SelectedIndex = 0 : cbx.SelectedIndex = -1;
+            if (listeDesDossiers.Count > 0)
+            {
+                cbx.SelectedIndex = (listeDesDossiers.Count >= 0) ? cbx.SelectedIndex = 0 : cbx.SelectedIndex = -1;
+            }
         }
 
         /// <summary>
@@ -277,7 +281,7 @@ namespace OuvreurDeDossiers
             };
             int nbTips = tips.Length;
             Random rd = new Random();
-            labelTips.Text = $"Tip: {tips[rd.Next(nbTips)].ToString()}";
+            labelTips.Text = $"Tip: {tips[rd.Next(nbTips)]}";
         }
 
         #region [Drag Form]

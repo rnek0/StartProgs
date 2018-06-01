@@ -19,7 +19,7 @@ namespace UnitTestProject1
 
             Assert.AreSame(md1, md2, "Ce n'est pas le même objet de type MesDossiers.");
             Assert.AreEqual(md1.Dossiers.Count, md2.Dossiers.Count, "Les listes sont pas ok ?");
-            Assert.IsFalse(md2.Dossiers == null);
+            Assert.IsFalse(md2.Dossiers == null,"La liste doit être initialisée.");
             Assert.AreEqual(md1.Dossiers[0], md2.Dossiers[0], "Les contenus des listes sont pas les mêmes");
         }
     }

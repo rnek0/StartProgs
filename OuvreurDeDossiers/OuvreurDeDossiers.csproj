@@ -56,6 +56,8 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Datas\DatasIO.cs" />
+    <Compile Include="Datas\FoldersSerializer.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,11 +70,12 @@
     <Compile Include="FormHelp.Designer.cs">
       <DependentUpon>FormHelp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="IDatasOperations.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="MesDossiers.cs" />
-    <Compile Include="MesDossiersPersistance.cs" />
-    <Compile Include="MesDossiersServices.cs" />
+    <Compile Include="Datas\MesDossiersPersistance.cs" />
+    <Compile Include="Datas\MesDossiersFichier.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Resources\About.png" />

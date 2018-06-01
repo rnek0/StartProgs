@@ -42,33 +42,54 @@ namespace StartProgs
         /// Ouvre le dossier spécifié dans l'explorateur windows.
         /// </summary>
         /// <param name="dossier">string du dossier a ouvrir.</param>
-        public void OuvreLeDossier(string dossier="")
+        public bool OuvreLeDossier(string dossier="")
         {
             dossier = Chemin;
+            var ouvertureEffectuee = false;
+
             ProcessStartInfo monProcess = new ProcessStartInfo
             {
                 FileName = "explorer.exe"
             };
 
-            if (dossier == "")
-            { 
+            if (string.IsNullOrWhiteSpace(dossier))
+            {
+                ouvertureEffectuee = false;
                 monProcess.Arguments = Chemin;
             }
             else
             {
+                var navigationWeb = true;
+                ouvertureEffectuee = true;
                 monProcess.Arguments = dossier;
+                
+                navigationWeb = (dossier.Contains("https:") == true) ? true : false;
+
+                try
+                {
+                    if (navigationWeb == true)
+                    {
+                        // TODO : choix de navigateur ? 
+                        // 
+                        monProcess.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+                        Process.Start(monProcess);
+                    }
+                    else
+                    {
+                        if (System.IO.Directory.Exists(dossier))
+                        {
+                            Process.Start(monProcess);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
             }
 
-            try
-            {
-                if (System.IO.Directory.Exists(dossier)) { 
-                    Process.Start(monProcess);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return ouvertureEffectuee;
         }
     }
 }

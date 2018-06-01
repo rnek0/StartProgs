@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace OuvreurDeDossiers
 {
-    // TODO: prochaine fois serialisation xml.
     public interface IDatasOperations
     {
         void AjouteDossier(string strDossier, List<string> laListeDesDossiers);
