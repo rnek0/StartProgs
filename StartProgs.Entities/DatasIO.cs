@@ -1,16 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace OuvreurDeDossiers
+namespace StartProgs.Entities
 {
     public abstract class DatasIO
     {
+        /// <summary>
+        /// Save a List of string.
+        /// </summary>
+        /// <param name="datas">List of strings</param>
+        /// <returns>bool</returns>
         public abstract bool SauvegardeDansFichier(List<string> datas);
 
+        /// <summary>
+        /// Retrieves a List of string.
+        /// </summary>
+        /// <returns>List<string></returns>
         public abstract List<string> LectureDansFichier();
 
         /// <summary>
-        /// Verifie l'existance du fichier xml.
+        /// Checking the existence of the file.
         /// </summary>
         /// <returns>bool</returns>
         protected bool FichierExiste(string FichierXml)

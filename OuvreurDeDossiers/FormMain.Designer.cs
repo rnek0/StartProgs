@@ -46,6 +46,7 @@
             this.buttonSupprimer = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.labelTips = new System.Windows.Forms.Label();
+            this.labelSerialization = new System.Windows.Forms.Label();
             this.groupExecution.SuspendLayout();
             this.groupAjout.SuspendLayout();
             this.groupModifier.SuspendLayout();
@@ -238,13 +239,26 @@
             this.labelTips.TabIndex = 7;
             this.labelTips.Text = "label1";
             // 
+            // labelSerialization
+            // 
+            this.labelSerialization.AutoSize = true;
+            this.labelSerialization.BackColor = System.Drawing.Color.Transparent;
+            this.labelSerialization.Font = new System.Drawing.Font("Hermit", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSerialization.ForeColor = System.Drawing.Color.White;
+            this.labelSerialization.Location = new System.Drawing.Point(2, 77);
+            this.labelSerialization.Name = "labelSerialization";
+            this.labelSerialization.Size = new System.Drawing.Size(162, 19);
+            this.labelSerialization.TabIndex = 8;
+            this.labelSerialization.Text = "Sauvegarder sur :";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::OuvreurDeDossiers.Properties.Resources.fond1;
-            this.ClientSize = new System.Drawing.Size(783, 116);
+            this.ClientSize = new System.Drawing.Size(782, 116);
+            this.Controls.Add(this.labelSerialization);
             this.Controls.Add(this.labelTips);
             this.Controls.Add(this.groupSupprimer);
             this.Controls.Add(this.groupModifier);
@@ -290,6 +304,7 @@
         private System.Windows.Forms.Button buttonSupprimer;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label labelTips;
+        private System.Windows.Forms.Label labelSerialization;
     }
 }
 

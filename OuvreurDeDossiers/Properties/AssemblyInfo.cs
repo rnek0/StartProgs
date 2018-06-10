@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("OuvreurDeDossiers")]
-[assembly: AssemblyDescription("Sert a conserver et ouvrir rapidement les dossiers de travail.")]
+[assembly: AssemblyDescription("Sert a conserver et ouvrir rapidement les dossiers de travail. Permet également d'ouvrir des sites dans le navigateur.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("OuvreurDeDossiers")]
-[assembly: AssemblyCopyright("Tony Simoes  2016")]
+[assembly: AssemblyCopyright("Tony Simoes 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Vous pouvez spécifier toutes les valeurs ou indiquer les numéros de build et de révision par défaut 
 // en utilisant '*', comme indiqué ci-dessous :
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]

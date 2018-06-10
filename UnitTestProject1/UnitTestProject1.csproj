@@ -60,6 +60,14 @@
       <Project>{44298a20-d4d6-4523-aa0b-7d9a897d4a69}</Project>
       <Name>OuvreurDeDossiers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SQLiteSerializer\StartProgs.SQLiteSerializer.csproj">
+      <Project>{44b1a04a-0de6-41ce-b27b-6bc5620d07ce}</Project>
+      <Name>StartProgs.SQLiteSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StartProgs.Entities\StartProgs.Entities.csproj">
+      <Project>{576cba3b-8e2d-44d5-bbc1-38dcf59c6601}</Project>
+      <Name>StartProgs.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StartProgs\StartProgs.csproj">
       <Project>{0790dc96-b8b3-4d7d-9e30-20f8f3f1a080}</Project>
       <Name>StartProgs</Name>

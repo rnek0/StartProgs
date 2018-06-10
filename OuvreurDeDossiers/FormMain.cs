@@ -20,9 +20,9 @@ namespace OuvreurDeDossiers
         {
             InitializeComponent();
 
-            //var choixSerialization = "file"; // "xml"
-
-            var choixSerialization = "xml";
+            // var choixSerialization = "file"; 
+            var choixSerialization = "sqlite";
+            // var choixSerialization = "xml";
 
             datas = new MesDossiersFichier(choixSerialization);
 

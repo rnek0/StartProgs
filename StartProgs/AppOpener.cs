@@ -31,15 +31,13 @@ namespace StartProgs
             }
         }
 
-
         /// <summary>
         /// Chemin du dossier a ouvrir par l'explorateur.
         /// </summary>
         public string Chemin { get; set; }
-
         
         /// <summary>
-        /// Ouvre le dossier spécifié dans l'explorateur windows.
+        /// Ouvre le dossier spécifié dans l'explorateur windows, ou bien un url dans le navigateur.
         /// </summary>
         /// <param name="dossier">string du dossier a ouvrir.</param>
         public bool OuvreLeDossier(string dossier="")
@@ -70,7 +68,7 @@ namespace StartProgs
                     if (navigationWeb == true)
                     {
                         // TODO : choix de navigateur ? 
-                        // 
+                        // Voir dans la base de registre !
                         monProcess.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
                         Process.Start(monProcess);
                     }

@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using StartProgs.Entities;
 
 namespace OuvreurDeDossiers
 {
     /// <summary>
     /// Actions sur IO (ECRITURE DANS FICHIER .DAT).
     /// </summary>
-    public class MesDossiersPersistance: DatasIO
+    public class FoldersPersistance: DatasIO
     {
         private string MonFichier = "";
 
-        public MesDossiersPersistance()
+        public FoldersPersistance()
         {
             MonFichier = Environment.CurrentDirectory + "\\" + "MesDossiers.dat";
         }
@@ -97,15 +98,6 @@ namespace OuvreurDeDossiers
             return listeLue;
         }
         #endregion
-
-        ///// <summary>
-        ///// Verifie l'existance du fichier texte.
-        ///// </summary>
-        ///// <returns>bool</returns>
-        //private bool FichierExiste()
-        //{
-        //    return (File.Exists(MonFichier)) ? true : false;
-        //}
 
     }
 }

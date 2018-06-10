@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using StartProgs.Entities;
 
 namespace OuvreurDeDossiers
 {
@@ -11,7 +12,7 @@ namespace OuvreurDeDossiers
 
         DatasIO persistance = null;
 
-        // Ici injection !!!
+        // Ici injection du mode de sauvegarde !!!
         public MesDossiersFichier(string datasIO)
         {
             switch (datasIO)
@@ -20,18 +21,24 @@ namespace OuvreurDeDossiers
                     persistance = new FoldersSerializer();
                     break;
 
+                case "sqlite":
+                    persistance = new SQLiteSerializer.SQLiteSerialize();
+                    break;
+
                 case "file":
                     // TODO : renomer cette classe !
-                    persistance = new MesDossiersPersistance();
+                    persistance = new FoldersPersistance();
                     break;
 
                 default:
                     break;
             }
-
+            //DossiersService = new List<string>();
+            if (persistance != null)
+            {
+                DossiersService = persistance.LectureDansFichier();
+            }
             
-            DossiersService = persistance.LectureDansFichier();
-
         }
 
         // CREATE
