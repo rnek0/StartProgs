@@ -148,7 +148,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Datas\FoldersSerializer.cs" />
+    <Compile Include="Datas\XmlSerialize.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,10 +163,11 @@
     </Compile>
     <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Datas\IDatasOperations.cs" />
-    <Compile Include="Datas\FoldersPersistance.cs" />
+    <Compile Include="Datas\IOSerialize.cs" />
     <Compile Include="Datas\MesDossiersFichier.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveChoice.cs" />
     <None Include="packages.config" />
     <None Include="Resources\About.png" />
     <EmbeddedResource Include="About.resx">

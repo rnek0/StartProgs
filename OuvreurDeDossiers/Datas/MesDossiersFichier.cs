@@ -9,39 +9,35 @@ namespace OuvreurDeDossiers
     public class MesDossiersFichier : IDatasOperations
     {
         List<string> DossiersService { get; set; }
-
         DatasIO persistance = null;
 
-        // Ici injection du mode de sauvegarde !!!
-        public MesDossiersFichier(string datasIO)
+        // Injection du mode de sauvegarde.
+        public MesDossiersFichier(SaveChoice choice)
         {
-            switch (datasIO)
+            switch (choice)
             {
-                case "xml":
-                    persistance = new FoldersSerializer();
+                case SaveChoice.xml:
+                    persistance = new XmlSerialize();
                     break;
-
-                case "sqlite":
+                case SaveChoice.file:
+                    persistance = new IOSerialize();
+                    break;
+                case SaveChoice.sqlite:
                     persistance = new SQLiteSerializer.SQLiteSerialize();
                     break;
-
-                case "file":
-                    // TODO : renomer cette classe !
-                    persistance = new FoldersPersistance();
-                    break;
-
+                case SaveChoice.mongodb:
+                    // persistance = new IOSerialize(); next time
+                    // break;
                 default:
+                    // persistance = null;
                     break;
             }
-            //DossiersService = new List<string>();
             if (persistance != null)
             {
                 DossiersService = persistance.LectureDansFichier();
             }
-            
         }
 
-        // CREATE
         /// <summary>
         /// Ajoute un dossier.
         /// </summary>
@@ -49,30 +45,37 @@ namespace OuvreurDeDossiers
         /// <param name="laListeDesDossiers">List<string></param>
         public void AjouteDossier(string strDossier, List<string> laListeDesDossiers)
         {
-            DossiersService.Add(strDossier);
-            persistance.SauvegardeDansFichier(DossiersService);
+            if (persistance != null) { 
+                DossiersService.Add(strDossier);
+                persistance.SauvegardeDansFichier(DossiersService);
+            }
         }
-        
-        // READ.
+
         /// <summary>
         /// Lecture de la liste de dossiers.
         /// </summary>
         /// <returns>List<string></returns>
         public List<string> LireDossiers()
         {
-            DossiersService = persistance.LectureDansFichier();
+            if (persistance != null)
+            {
+                DossiersService = persistance.LectureDansFichier();
+            }
             return DossiersService;
         }
 
-        // UPDATE.
         /// <summary>
         /// Modifie l'entrée dans la liste.
         /// </summary>
-        /// <param name="ancienneValeur"></param>
-        /// <param name="nouvelleValeur"></param>
-        /// <param name="laListeDesDossiers"></param>
+        /// <param name="ancienneValeur">string</param>
+        /// <param name="nouvelleValeur">string</param>
+        /// <param name="laListeDesDossiers">List<string></param>
         public void ModifieDossier(string ancienneValeur, string nouvelleValeur, List<string> laListeDesDossiers)
         {
+            if (persistance == null)
+            {
+                return;
+            }
             if (!string.IsNullOrWhiteSpace(nouvelleValeur))
             { 
                 int indice = 0;
@@ -91,14 +94,17 @@ namespace OuvreurDeDossiers
             }
         }
 
-        // DEL.
         /// <summary>
         /// Supprime le dossier passé de la liste.
         /// </summary>
-        /// <param name="strDossierPourSuppression"></param>
-        /// <param name="laListeDesDossiers"></param>
+        /// <param name="strDossierPourSuppression">string</param>
+        /// <param name="laListeDesDossiers">List<string></param>
         public void SupprimeDossier(string strDossierPourSuppression, List<string> laListeDesDossiers)
         {
+            if (persistance == null)
+            {
+                return;
+            }
             //int index_old = laListeDesDossiers.FindIndex((o) => {return o == strDossierPourSuppression; });// Fixed ?
             var index = 0;
             for (int i = 0; i < laListeDesDossiers.Count; i++)
@@ -114,10 +120,17 @@ namespace OuvreurDeDossiers
 
             persistance.SauvegardeDansFichier(laListeDesDossiers);
         }
-        
-        // SAVE.
+
+        /// <summary>
+        /// Sauvegarde la liste de dossiers.
+        /// </summary>
+        /// <param name="datas">List<string></param>
         public void SauvegardeDossiers(List<string> datas)
         {
+            if (persistance == null)
+            {
+                return;
+            }
             persistance.SauvegardeDansFichier(datas);
         }
     }

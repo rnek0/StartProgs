@@ -10,11 +10,11 @@ namespace OuvreurDeDossiers
     /// <summary>
     /// Serializeur XML de la liste des dossiers.
     /// </summary>
-    public class FoldersSerializer: DatasIO
+    public class XmlSerialize : DatasIO
     {
         string FichierXml { get; set; }
 
-        public FoldersSerializer()
+        public XmlSerialize()
         {
             FichierXml = Environment.CurrentDirectory + "\\" + "MesDossiers.xml";
         }

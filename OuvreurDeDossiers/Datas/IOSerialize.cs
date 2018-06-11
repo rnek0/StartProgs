@@ -7,13 +7,13 @@ using StartProgs.Entities;
 namespace OuvreurDeDossiers
 {
     /// <summary>
-    /// Actions sur IO (ECRITURE DANS FICHIER .DAT).
+    /// Sauvegarde les datas sous forme de fichier texte.
     /// </summary>
-    public class FoldersPersistance: DatasIO
+    public class IOSerialize : DatasIO
     {
         private string MonFichier = "";
 
-        public FoldersPersistance()
+        public IOSerialize()
         {
             MonFichier = Environment.CurrentDirectory + "\\" + "MesDossiers.dat";
         }

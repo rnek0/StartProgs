@@ -8,9 +8,8 @@ namespace OuvreurDeDossiers
     public partial class FormMain : Form
     {
         List<string> MesDossiersImportants { get; set; }
-
         Point positionInitiale = new Point(10, 10);
-        string ancienneValeur = "";
+        string ancienneValeur = ""; // Old value to update.
         IDatasOperations datas;
 
         /// <summary>
@@ -20,30 +19,18 @@ namespace OuvreurDeDossiers
         {
             InitializeComponent();
 
-            // var choixSerialization = "file"; 
-            // var choixSerialization = "mongo";
-            var choixSerialization = "sqlite";
-            // var choixSerialization = "xml";
-
-            datas = new MesDossiersFichier(choixSerialization);
-
+            datas = new MesDossiersFichier(SaveChoice.file);
             MesDossiersImportants = datas.LireDossiers();
 
             TipAleatoire();
-
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
 
-            // Ouverture du dossier séléctionné.
             buttonOuvrir.Click += (s,e) =>
             {
                 Ouvre();
             };
 
-            /// <summary>
-            /// Drag window.
-            /// </summary>
-            /// <param name="sender">Form</param>
-            /// <param name="e">Mouse event</param>
+            // Drag window.
             this.MouseDown += (se, ev) => {
                 if (ev.Button == MouseButtons.Left)
                 {
@@ -109,7 +96,6 @@ namespace OuvreurDeDossiers
                 if (comboChoixDossier.SelectedItem != null)
                 {
                     Ouvreur.Chemin = comboChoixDossier.SelectedItem.ToString();
-
                     try
                     {
                         Ouvreur.OuvreLeDossier();
@@ -176,32 +162,15 @@ namespace OuvreurDeDossiers
 
         #endregion
 
-        // Ajout.
+        // Ajoute le dossier dans la liste.
         private void ButtonAjouter_Click(object sender, EventArgs e)
         {
-            // TODO: enleve l'appel superflu !
-            Ajoute();
-        }
-
-        /// <summary>
-        /// Ajouter le dossier dans la liste.
-        /// </summary>
-        private void Ajoute()
-        {
             var entree = textBoxAjouter.Text;
-            bool sortie = false;
-
-            // TODO: refactoriser ici
-            if (entree == "")
-            {
-                sortie = true;
-                AfficheLeGroupe(affichage, groupExecution.Name);
-            }
-            if (!sortie)
+            if (!string.IsNullOrEmpty(entree) && !string.IsNullOrWhiteSpace(entree))
             {
                 datas.AjouteDossier(entree, MesDossiersImportants);
-                AfficheLeGroupe(affichage, groupExecution.Name);
             }
+            AfficheLeGroupe(affichage, groupExecution.Name);
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
@@ -231,9 +200,7 @@ namespace OuvreurDeDossiers
             InitializeCombo(comboChoixDossier, MesDossiersImportants);
         }
 
-        /// <summary>
-        /// Fermeture de l'application.
-        /// </summary>      
+        // Fermeture de l'application.    
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Vraiement quitter ?",
@@ -251,8 +218,8 @@ namespace OuvreurDeDossiers
         /// <summary>
         /// Initialization du combo avec les données de la liste.
         /// </summary>
-        /// <param name="cbx"></param>
-        /// <param name="listeDesDossiers"></param>
+        /// <param name="cbx">ComboBox</param>
+        /// <param name="listeDesDossiers">List<string></param>
         private void InitializeCombo(ComboBox cbx, List<string> listeDesDossiers)
         {
             cbx.DataSource = null;
@@ -263,9 +230,7 @@ namespace OuvreurDeDossiers
             }
         }
 
-        /// <summary>
-        /// Tip aleatoire.
-        /// </summary>
+        // Tip aleatoire.
         void TipAleatoire()
         {
             string[] tips = new string[]{

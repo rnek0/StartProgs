@@ -3,7 +3,7 @@ using System.Diagnostics;
 namespace StartProgs
 {
     /// <summary>
-    /// Singleton servant a ouvrir un dossier avec explorer.exe.
+    /// Ouvre un dossier avec explorer.exe ou bien le navigateur internet.
     /// </summary>
     public sealed class AppOpener
     {
@@ -39,7 +39,7 @@ namespace StartProgs
         /// <summary>
         /// Ouvre le dossier spécifié dans l'explorateur windows, ou bien un url dans le navigateur.
         /// </summary>
-        /// <param name="dossier">string du dossier a ouvrir.</param>
+        /// <param name="dossier">string</param>
         public bool OuvreLeDossier(string dossier="")
         {
             dossier = Chemin;
@@ -84,9 +84,7 @@ namespace StartProgs
                 {
                     throw;
                 }
-
             }
-
             return ouvertureEffectuee;
         }
     }
