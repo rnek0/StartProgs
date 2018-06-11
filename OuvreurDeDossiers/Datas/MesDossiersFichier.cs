@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using StartProgs.Entities;
-
+using StartProgs.MongoDBSerializer;
+using StartProgs.SQLiteSerializer;
 namespace OuvreurDeDossiers
 {
     /// <summary>
@@ -10,9 +11,8 @@ namespace OuvreurDeDossiers
     {
         List<string> DossiersService { get; set; }
         DatasIO persistance = null;
-
-        // Injection du mode de sauvegarde.
-        public MesDossiersFichier(SaveChoice choice)
+        
+        public MesDossiersFichier(SaveChoice choice) // Choix du mode de sauvegarde.
         {
             switch (choice)
             {
@@ -23,11 +23,11 @@ namespace OuvreurDeDossiers
                     persistance = new IOSerialize();
                     break;
                 case SaveChoice.sqlite:
-                    persistance = new SQLiteSerializer.SQLiteSerialize();
+                    persistance = new SQLiteSerialize();
                     break;
                 case SaveChoice.mongodb:
-                    // persistance = new IOSerialize(); next time
-                    // break;
+                    persistance = new MongoSerialize();
+                    break;
                 default:
                     // persistance = null;
                     break;
@@ -47,7 +47,7 @@ namespace OuvreurDeDossiers
         {
             if (persistance != null) { 
                 DossiersService.Add(strDossier);
-                persistance.SauvegardeDansFichier(DossiersService);
+                persistance.SauvegardeDansFichier(DossiersService, strDossier);
             }
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace StartProgs.SQLiteSerializer
+namespace StartProgs.Entities
 {
     public interface IRepository : IDisposable
     {

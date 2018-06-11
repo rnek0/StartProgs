@@ -2,7 +2,7 @@
 using System;
 using StartProgs.Entities;
 
-namespace SQLiteSerializer
+namespace StartProgs.SQLiteSerializer
 {
     public class DossierDBContext : DbContext
     {
@@ -18,7 +18,7 @@ namespace SQLiteSerializer
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionbuilder)
         {
-            var db = $@"{Environment.CurrentDirectory}\Sample.db";
+            var db = $@"{Environment.CurrentDirectory}\{DbConfig.DbName}.db";
             optionbuilder.UseSqlite($@"Data Source={db}");
         }
 

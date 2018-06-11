@@ -10,7 +10,7 @@ namespace StartProgs.Entities
         /// </summary>
         /// <param name="datas">List of strings</param>
         /// <returns>bool</returns>
-        public abstract bool SauvegardeDansFichier(List<string> datas);
+        public abstract bool SauvegardeDansFichier(List<string> datas, string dossier = "");
 
         /// <summary>
         /// Retrieves a List of string.

@@ -11,11 +11,11 @@ namespace OuvreurDeDossiers
     /// </summary>
     public class IOSerialize : DatasIO
     {
-        private string MonFichier = "";
+        string MonFichier;
 
         public IOSerialize()
         {
-            MonFichier = Environment.CurrentDirectory + "\\" + "MesDossiers.dat";
+            MonFichier = $@"{Environment.CurrentDirectory}\{DbConfig.DbName}.dat";
         }
 
         #region SAUVEGARDE
@@ -24,7 +24,7 @@ namespace OuvreurDeDossiers
         /// </summary>
         /// <param name="lesDossiers"></param>
         /// <returns>bool</returns>
-        public override bool SauvegardeDansFichier(List<string> lesDossiers) {
+        public override bool SauvegardeDansFichier(List<string> lesDossiers, string dossier = "") {
             bool sauvegarde = false;
             if (FichierExiste(MonFichier) == true)
             {

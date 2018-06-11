@@ -19,7 +19,7 @@ namespace OuvreurDeDossiers
         {
             InitializeComponent();
 
-            datas = new MesDossiersFichier(SaveChoice.file);
+            datas = new MesDossiersFichier(SaveChoice.mongodb);
             MesDossiersImportants = datas.LireDossiers();
 
             TipAleatoire();
@@ -187,6 +187,7 @@ namespace OuvreurDeDossiers
         // Suppression.
         private void ButtonSupprimer_Click(object sender, EventArgs e)
         {
+            // todo: demander confirmation de suppression.
             datas.SupprimeDossier(textBoxSupprimer.Text ,MesDossiersImportants);
             AfficheLeGroupe(affichage, groupExecution.Name);
             InitializeCombo(comboChoixDossier, MesDossiersImportants);

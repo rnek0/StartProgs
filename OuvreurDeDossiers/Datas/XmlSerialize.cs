@@ -12,16 +12,16 @@ namespace OuvreurDeDossiers
     /// </summary>
     public class XmlSerialize : DatasIO
     {
-        string FichierXml { get; set; }
+        readonly string FichierXml = "";
 
         public XmlSerialize()
         {
-            FichierXml = Environment.CurrentDirectory + "\\" + "MesDossiers.xml";
+            FichierXml = $@"{Environment.CurrentDirectory}\{DbConfig.DbName}.xml";
         }
 
         #region SAUVEGARDE
 
-        public override bool SauvegardeDansFichier(List<string> lesDossiers)
+        public override bool SauvegardeDansFichier(List<string> lesDossiers, string dossier = "")
         {
             return SerializeListe(lesDossiers);
         }

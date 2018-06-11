@@ -1,11 +1,10 @@
 ﻿using StartProgs.Entities;
 using System.Collections.Generic;
-using StartProgs.SQLiteSerializer;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
 
-namespace SQLiteSerializer
+namespace StartProgs.SQLiteSerializer
 {
     public class SQLiteSerialize : DatasIO, IRepository
     {
@@ -80,11 +79,11 @@ namespace SQLiteSerializer
 
         #region SAUVEGARDE
 
-        public override bool SauvegardeDansFichier(List<string> datas)
+        public override bool SauvegardeDansFichier(List<string> datas, string dossier = "")
         {
             // Todo: POUR L'INSTANT ON EFFACE ET ON RECREE (pas tres propre), 
             // PASSER LA List<string> en Dictionnary pour utiliser les guid ?
-            // Cette méthode devrapasser en async egalement.
+            // Cette méthode devra passer en async egalement.
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
