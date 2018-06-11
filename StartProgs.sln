@@ -8,10 +8,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OuvreurDeDossiers", "OuvreurDeDossiers\OuvreurDeDossiers.csproj", "{44298A20-D4D6-4523-AA0B-7D9A897D4A69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D101850C-126A-424C-8A40-FFD9FF66AED2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{A5DD5B73-2CBC-48A7-A7C1-0C4B457ABBD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartProgs.SQLiteSerializer", "SQLiteSerializer\StartProgs.SQLiteSerializer.csproj", "{44B1A04A-0DE6-41CE-B27B-6BC5620D07CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartProgs.SQLiteSerializer", "SQLiteSerializer\StartProgs.SQLiteSerializer.csproj", "{44B1A04A-0DE6-41CE-B27B-6BC5620D07CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartProgs.Entities", "StartProgs.Entities\StartProgs.Entities.csproj", "{576CBA3B-8E2D-44D5-BBC1-38DCF59C6601}"
 EndProject

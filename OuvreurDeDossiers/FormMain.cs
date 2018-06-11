@@ -21,6 +21,7 @@ namespace OuvreurDeDossiers
             InitializeComponent();
 
             // var choixSerialization = "file"; 
+            // var choixSerialization = "mongo";
             var choixSerialization = "sqlite";
             // var choixSerialization = "xml";
 

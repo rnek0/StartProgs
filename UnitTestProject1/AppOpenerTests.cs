@@ -17,7 +17,7 @@ namespace UnitTestProject1
             appOpener.Chemin = @"C:\";
             Assert.IsTrue(appOpener.OuvreLeDossier(),"Pas d'ouverture de dossier dans OuvreLeDossier");
 
-            appOpener.Chemin = "http://www.google.fr";
+            appOpener.Chemin = "https://www.google.fr";
             Assert.IsTrue(appOpener.OuvreLeDossier(),"Pas d'ouverture de navigateur avec OuvreLeDossier");
 
             appOpener.Chemin = "";
