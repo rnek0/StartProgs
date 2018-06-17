@@ -4,7 +4,7 @@ using OuvreurDeDossiers;
 
 // Ctrl R, L to run test.
 
-namespace UnitTestProject1
+namespace UnitTestStartProgs
 {
     [TestClass]
     public class UnitTestMesDossiers

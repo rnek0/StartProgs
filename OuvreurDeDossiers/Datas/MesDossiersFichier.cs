@@ -60,6 +60,14 @@ namespace OuvreurDeDossiers
             if (persistance != null)
             {
                 DossiersService = persistance.LectureDansFichier();
+
+                //var ld = new List<Dossier>();
+                //ld = (persistance as IRepository).Filter<Dossier>((x) => x.DossierName != "");
+                //foreach (var item in ld)
+                //{
+                //    DossiersService.Add(item.DossierName);
+                //}
+                
             }
             return DossiersService;
         }
@@ -76,6 +84,9 @@ namespace OuvreurDeDossiers
             {
                 return;
             }
+
+            //TODO: update mongo !
+
             if (!string.IsNullOrWhiteSpace(nouvelleValeur))
             { 
                 int indice = 0;
@@ -117,8 +128,18 @@ namespace OuvreurDeDossiers
             }
 
             laListeDesDossiers.RemoveAt(index);
-
-            persistance.SauvegardeDansFichier(laListeDesDossiers);
+            
+            if (persistance is IRepository)
+            {
+                // Del with MongoDB
+                Dossier d = new Dossier();
+                d.DossierName = strDossierPourSuppression;
+                (persistance as IRepository).Delete<Dossier>(d);
+            }
+            else {
+                // Del with IO, XML
+                persistance.SauvegardeDansFichier(laListeDesDossiers);
+            }
         }
 
         /// <summary>

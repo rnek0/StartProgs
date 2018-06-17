@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StartProgs;
 
-namespace UnitTestProject1
+namespace UnitTestStartProgs
 {
     [TestClass]
     public class AppOpenerTests

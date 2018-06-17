@@ -6,20 +6,19 @@ namespace StartProgs.Entities
 {
     public interface IRepository : IDisposable
     {
-        // Para agregar una nueva entidad a la bd.
+        // ADD ENTITY
         TEntity Create<TEntity>(TEntity toCreate) where TEntity : class;
 
-        // Para eliminar una entidad de la bd.
+        // DEL ENTITY
         bool Delete<TEntity>(TEntity toDelete) where TEntity : class;
 
-        // Para Actualizar una entidad.
+        // UPDATE ENTITY
         bool Update<TEntity>(TEntity toUpdate) where TEntity : class;
 
-        // Para recuperar una entidad en base a un criterio.
+        // READ ENTITY
         TEntity Retrieve<TEntity>(Expression<Func<TEntity, bool>> criteria) where TEntity : class;
 
-        // Para recuperar un conjunto de entidades
-        // que cumplan con un criterio de busqueda.
+        // List & return entities by filter.
         List<TEntity> Filter<TEntity>(Expression<Func<TEntity, bool>> criteria) where TEntity : class;
     }
 }

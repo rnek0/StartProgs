@@ -1,0 +1,40 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"></head><body> 
+ <h1>DotNetMongoDB</h1>
+<h2>Install Mongo.db</h2>
+<p><a href="https://www.mongodb.com/download-center#community">Download community server</a></p>
+<p>MongoDB a besoin de ce dossier pour fonctionner <strong>C:\data\db</strong> donc: <strong>mkdir C:\data\db</strong></p>
+<ul>
+<li>Installer le .msi</li>
+<li>Exemple de path C:\Program Files\MongoDB\Server\3.6\bin</li>
+</ul>
+<h2>Start MongoDB</h2>
+<ul>
+<li>Ouvrir explorer dans C:\Program Files\MongoDB\Server\3.6\bin + F4 + cmd + enter</li>
+<li>Lancement : <strong>C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe</strong></li>
+</ul>
+<pre><code class="language-batch">cd C:\Program Files\MongoDB\Server\3.6\bin\ &amp;&amp; mongod.exe
+</code></pre>
+<h2>Connection</h2>
+<ul>
+<li>Ouvrir explorer dans C:\Program Files\MongoDB\Server\3.6\bin + F4 + cmd + enter</li>
+<li>Lancement : <strong>C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe</strong></li>
+</ul>
+<p>Dans une autre cmd:</p>
+<pre><code class="language-batch">cd C:\Program Files\MongoDB\Server\3.6\bin\ &amp;&amp; mongo.exe
+</code></pre>
+<h2>Arrêt</h2>
+<ul>
+<li><strong>Ctrl + C</strong></li>
+</ul>
+<h2>Nuget pour WPF</h2>
+<p><a href="http://mongodb.github.io/mongo-csharp-driver/2.2/getting_started/installation/">Dotnet driver</a></p>
+<p><a href="https://docs.mongodb.com/ecosystem/drivers/csharp/">Docs sur MongoDB &amp; dotnet</a></p>
+<h2>Using MongoDB CLI</h2>
+<ul>
+<li>help</li>
+<li><strong>show dbs</strong> : voir les bases de données</li>
+<li><strong>use MesDossiers</strong> : utiliser la base MesDossiers</li>
+<li><strong>db.documents.find()</strong> : lister les documents dans la base MesDossiers</li>
+<li>...</li>
+</ul>
+ </body><html>

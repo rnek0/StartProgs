@@ -5,15 +5,13 @@ using StartProgs.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace StartProgs.MongoDBSerializer
 {
     public class MongoSerialize : DatasIO, IRepository
     {
         IMongoCollection<Dossier> collection = null;
-        //IMongoCollection<Dossier> Collection { get => collection; set => collection = value; }
-
+        
         public MongoSerialize()
         {
             // pour BsonDocument
@@ -34,60 +32,93 @@ namespace StartProgs.MongoDBSerializer
             collection = database.GetCollection<Dossier>("dossiers");
         }
 
-        
-
-        public Dossier Create<Dossier>(Dossier toCreate) where Dossier : class
+        // CREATE. (OK)
+        public TEntity Create<TEntity>(TEntity toCreate) where TEntity : class
         {
-            // throw new NotImplementedException();
-
+            var d = toCreate as Dossier;
+            collection.InsertOne(d);
             return toCreate;
         }
 
+        // DELETE. (OK)
         public bool Delete<TEntity>(TEntity toDelete) where TEntity : class
         {
-            throw new NotImplementedException();
+            DeleteResult res;
+            if (toDelete is string)
+            {
+                var d = new Dossier();
+                var _filter = Builders<Dossier>.Filter.Eq("DossierName", toDelete);
+                res = collection.DeleteOne(_filter);
+            }
+            else
+            { 
+                var dossier = toDelete as Dossier;
+                
+                var filter = Builders<Dossier>.Filter.Eq("DossierName", dossier.DossierName);
+                res = collection.DeleteOne(filter);
+            }
+            return res.DeletedCount > 0? true: false;
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TEntity> Filter<TEntity>(Expression<Func<TEntity, bool>> criteria) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        // LECTURE ok :)
+        // LECTURE List<string> (OK)
         public override List<string> LectureDansFichier()
         {
             List<string> docs = new List<string>();
-
             var count = collection.Count(new BsonDocument());
-
             if (count > 0)
             {
-                // Test H:\
-                //var docu = collection.Find((x)=>x.DossierName=="H:\\").FirstOrDefault();
-                //docs.Add(docu.DossierName);
-                
                 var documents = collection.Find(new BsonDocument()).ToList();
                 for (int i = 0; i < documents.Count; i++)
                 {
                     docs.Add(documents[i].DossierName);
                 }
             }
-
             return docs;
         }
 
-        public TEntity Retrieve<TEntity>(Expression<Func<TEntity, bool>> criteria) where TEntity : class
+        // TODO: UPDATE (a tester)
+        public bool Update<TEntity>(TEntity toUpdate) where TEntity : class
         {
-            throw new NotImplementedException();
+            var Result = false;
+            var dossier = toUpdate as Dossier;
+            try
+            {
+                var filter = Builders<Dossier>.Filter.Eq("DossierID", dossier.DossierID);
+                var update = Builders<Dossier>.Update.Set("DossierName", dossier.DossierName);
+                var result = collection.UpdateOne(filter, update);
+
+                Result = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Result;
         }
 
+        // Pas utilisée pour le moment.
+        public List<Dossier> Filter<Dossier>(Expression<Func<Dossier, bool>> criteria) where Dossier : class
+        {
+            List<Dossier> res = null;
+
+            // ??
+            
+            return res;
+        }
+
+        // READ ONE ENTITY
+        public Dossier Retrieve<Dossier>(Expression<Func<Dossier, bool>> criteria) where Dossier : class
+        {
+            Dossier result = null;
+
+            var t = criteria.Parameters.ToBsonDocument(typeof(Dossier));
+
+            result = collection.Find(t).FirstOrDefault() as Dossier;
+
+            return result;
+        }
+        
         // SAUVEGARDE 
-        // Todo: insert & list is ok. C R manque D U
         public override bool SauvegardeDansFichier(List<string> datas, string dossier = "")
         {
             bool result = false;
@@ -97,7 +128,8 @@ namespace StartProgs.MongoDBSerializer
                 Dossier d = new Dossier { DossierID = Guid.NewGuid().ToString(), DossierName = dossier };
                 try
                 {
-                    collection.InsertOne(d);
+                    //collection.InsertOne(d);
+                    Create(d);
                     result = true;
                 }
                 catch (Exception ex)
@@ -114,7 +146,7 @@ namespace StartProgs.MongoDBSerializer
             return result;
         }
 
-        public bool Update<TEntity>(TEntity toUpdate) where TEntity : class
+        public void Dispose()
         {
             throw new NotImplementedException();
         }

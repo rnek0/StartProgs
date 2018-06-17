@@ -52,6 +52,7 @@
     <Compile Include="AppOpenerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestMesDossiers.cs" />
+    <Compile Include="UnitTestMongoDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -69,6 +70,10 @@
     <ProjectReference Include="..\StartProgs.Entities\StartProgs.Entities.csproj">
       <Project>{576cba3b-8e2d-44d5-bbc1-38dcf59c6601}</Project>
       <Name>StartProgs.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StartProgs.MongoDBSerializer\StartProgs.MongoDBSerializer.csproj">
+      <Project>{244e192b-5d3f-4362-aa69-65224add333c}</Project>
+      <Name>StartProgs.MongoDBSerializer</Name>
     </ProjectReference>
     <ProjectReference Include="..\StartProgs\StartProgs.csproj">
       <Project>{0790dc96-b8b3-4d7d-9e30-20f8f3f1a080}</Project>

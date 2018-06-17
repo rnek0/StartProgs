@@ -9,4 +9,4 @@ Permet de sauvegarder sur :
 * IO écriture de fichier .dat
 * IO sérialisation xml
 * SQLite
-* next (MongoDB)
+* MongoDB

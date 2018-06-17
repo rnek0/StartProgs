@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using StartProgs.Entities;
+using System.Collections.Generic;
 
 namespace OuvreurDeDossiers
 {

@@ -29,19 +29,16 @@ namespace StartProgs.SQLiteSerializer
             return Result;
         }
 
-        // DELETE
-        public bool Delete<Dossier>(Dossier toDelete) where Dossier : class
+        // UPDATE
+        public bool Update<Dossier>(Dossier toUpdate) where Dossier : class
         {
             throw new NotImplementedException();
         }
 
-        // DISPOSE
-        public void Dispose()
+        // DELETE
+        public bool Delete<Dossier>(Dossier toDelete) where Dossier : class
         {
-            if (context != null)
-            {
-                context.Dispose();
-            }
+            throw new NotImplementedException();
         }
 
         // FILTER
@@ -107,9 +104,13 @@ namespace StartProgs.SQLiteSerializer
 
         #endregion
 
-        public bool Update<Dossier>(Dossier toUpdate) where Dossier : class
+        // DISPOSE
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            if (context != null)
+            {
+                context.Dispose();
+            }
         }
     }
 }
