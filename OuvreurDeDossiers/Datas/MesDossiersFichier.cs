@@ -29,7 +29,7 @@ namespace OuvreurDeDossiers
                     persistance = new MongoSerialize();
                     break;
                 default:
-                    // persistance = null;
+                    persistance = new IOSerialize();
                     break;
             }
             if (persistance != null)

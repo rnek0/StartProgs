@@ -30,6 +30,7 @@ namespace StartProgs.MongoDBSerializer
 
             // GetCollection.
             collection = database.GetCollection<Dossier>("dossiers");
+            
         }
 
         // CREATE. (OK)
