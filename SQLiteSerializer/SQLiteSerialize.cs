@@ -38,7 +38,7 @@ namespace StartProgs.SQLiteSerializer
         // DELETE
         public bool Delete<Dossier>(Dossier toDelete) where Dossier : class
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // TODO : Implementa !!!
         }
 
         // FILTER

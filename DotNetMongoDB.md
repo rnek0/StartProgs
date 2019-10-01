@@ -4,29 +4,26 @@
 
 [Download community server](https://www.mongodb.com/download-center/community)
 
+Ne pas installer en tant que service !  
+Installer Compass Community au besoin (GUI pour MongoDB https://docs.mongodb.com/compass/master/ )
+
 MongoDB a besoin de ce dossier pour fonctionner __C:\data\db__ donc: __mkdir C:\data\db__
 
 * Installer le .msi 
-* Exemple de path C:\Program Files\MongoDB\Server\3.6\bin
+* Exemple de path C:\Program Files\MongoDB\Server\4.2\
 
 ## Start MongoDB 
 
-* Ouvrir explorer dans C:\Program Files\MongoDB\Server\3.6\bin + F4 + cmd + enter
-* Lancement : __C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe__
+* Ouvrir explorer dans C:\Program Files\MongoDB\Server\4.2\bin + F4 + cmd + enter
+* Lancement : __"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="C:\data\db"__
+* Voir la conn avec Compass Community sur localhost.
+
+Doc : https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#run-mongodb-from-cmd 
+
+###  Connection
 
 ```batch
-cd C:\Program Files\MongoDB\Server\3.6\bin\ && mongod.exe
-```
-
-## Connection
-
-* Ouvrir explorer dans C:\Program Files\MongoDB\Server\3.6\bin + F4 + cmd + enter
-* Lancement : __C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe__ 
-
-Dans une autre cmd:
-
-```batch
-cd C:\Program Files\MongoDB\Server\3.6\bin\ && mongo.exe
+cd C:\Program Files\MongoDB\Server\4.2\bin && mongo.exe
 ```
 
 ## Arrêt

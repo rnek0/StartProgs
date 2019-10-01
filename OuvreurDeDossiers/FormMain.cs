@@ -19,7 +19,8 @@ namespace OuvreurDeDossiers
         {
             InitializeComponent();
 
-            datas = new MesDossiersFichier(SaveChoice.mongodb);
+            // CHOIX DE  LA SERIALIZATION !!!
+            datas = new MesDossiersFichier(SaveChoice.file);
             MesDossiersImportants = datas.LireDossiers();
 
             TipAleatoire();

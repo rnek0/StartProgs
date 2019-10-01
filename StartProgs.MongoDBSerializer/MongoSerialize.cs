@@ -8,9 +8,23 @@ using System.Linq.Expressions;
 
 namespace StartProgs.MongoDBSerializer
 {
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0534 // 'MongoSerialize' n'implémente pas le membre abstrait hérité 'DatasIO.SauvegardeDansFichier(List<string>, string)'
+#pragma warning disable CS0012 // Le type 'IDisposable' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0012 // Le type 'IDisposable' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
     public class MongoSerialize : DatasIO, IRepository
+#pragma warning restore CS0012 // Le type 'IDisposable' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0012 // Le type 'IDisposable' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0534 // 'MongoSerialize' n'implémente pas le membre abstrait hérité 'DatasIO.SauvegardeDansFichier(List<string>, string)'
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
     {
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         IMongoCollection<Dossier> collection = null;
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         
         public MongoSerialize()
         {
@@ -62,10 +76,17 @@ namespace StartProgs.MongoDBSerializer
         }
 
         // LECTURE List<string> (OK)
+#pragma warning disable CS0012 // Le type 'List<>' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0508 // 'MongoSerialize.LectureDansFichier()' : le type de retour doit être 'List<string>' pour correspondre au membre substitué 'DatasIO.LectureDansFichier()'
         public override List<string> LectureDansFichier()
+#pragma warning restore CS0508 // 'MongoSerialize.LectureDansFichier()' : le type de retour doit être 'List<string>' pour correspondre au membre substitué 'DatasIO.LectureDansFichier()'
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0012 // Le type 'List<>' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         {
             List<string> docs = new List<string>();
-            var count = collection.Count(new BsonDocument());
+            //var count = collection.Count(new BsonDocument()); <- OBSOLETE
+            var count = collection.CountDocuments(new BsonDocument());
             if (count > 0)
             {
                 var documents = collection.Find(new BsonDocument()).ToList();
@@ -98,7 +119,13 @@ namespace StartProgs.MongoDBSerializer
         }
 
         // Pas utilisée pour le moment.
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         public List<Dossier> Filter<Dossier>(Expression<Func<Dossier, bool>> criteria) where Dossier : class
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         {
             List<Dossier> res = null;
 
@@ -108,7 +135,11 @@ namespace StartProgs.MongoDBSerializer
         }
 
         // READ ONE ENTITY
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         public Dossier Retrieve<Dossier>(Expression<Func<Dossier, bool>> criteria) where Dossier : class
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         {
             Dossier result = null;
 
@@ -120,7 +151,11 @@ namespace StartProgs.MongoDBSerializer
         }
         
         // SAUVEGARDE 
+#pragma warning disable CS0115 // 'MongoSerialize.SauvegardeDansFichier(List<string>, string)' : aucune méthode appropriée n'a été trouvée pour la substitution
+#pragma warning disable CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
         public override bool SauvegardeDansFichier(List<string> datas, string dossier = "")
+#pragma warning restore CS0012 // Le type 'Object' est défini dans un assembly qui n'est pas référencé. Vous devez ajouter une référence à l'assembly 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+#pragma warning restore CS0115 // 'MongoSerialize.SauvegardeDansFichier(List<string>, string)' : aucune méthode appropriée n'a été trouvée pour la substitution
         {
             bool result = false;
 
