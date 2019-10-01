@@ -2,7 +2,7 @@
 
 ## Install Mongo.db
 
-[Download community server](https://www.mongodb.com/download-center#community)
+[Download community server](https://www.mongodb.com/download-center/community)
 
 MongoDB a besoin de ce dossier pour fonctionner __C:\data\db__ donc: __mkdir C:\data\db__
 
